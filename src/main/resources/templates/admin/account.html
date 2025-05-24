@@ -4,7 +4,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Mon compte</title>
-<link rel="stylesheet" th:href="@{/css/style.css}">
+<link rel="stylesheet" th:href="@{/css/pages/session.css}">
 </head>
 
 <body>
@@ -13,24 +13,25 @@
 
 	<div class="container">
 		<!-- account.html -->
-		<h1>Bienvenue <span style="color: #f37500;" th:text="${admin.username}">Admin</span></h1>
+		<h1>
+			Bienvenue <span style="color: #f37500;" th:text="${admin.username}">Admin</span>
+		</h1>
+
+
+		<!-- Affichage du formulaire de gestion des modules
+			<div th:replace="~{modules/create-module :: moduleForm}"></div>
+		 -->
 		
+
+
 		<section>
 
-   <!--  
-       <h2>Sessions créées</h2>
-   <div th:if="${sessions.isEmpty()}">
-        <p>Aucune session n’a encore été créée.</p>
-    </div>
-   --> 
+			<!-- Insertion du fragment pour afficher les sessions créées -->
+			<div th:replace="~{session/session :: sessionsSection}"></div>
 
-    <!-- Insertion du fragment pour afficher les sessions créées -->
-    <div th:replace="~{session/session :: sessionsSection}"></div>
-    
-    
-</section>
-		
-	
+		</section>
+
+
 	</div>
 
 	<div th:insert="~{fragments/footer :: footer}"></div>

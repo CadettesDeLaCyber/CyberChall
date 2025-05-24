@@ -50,32 +50,6 @@ header nav ul li a:hover {
     color: #f37500;
 }
 
-/* ---- Section Hero ---- */
-/* .hero {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 2rem 5%;
-    min-height: 70vh;
-    transition: background 0.5s ease;
-} */
-.hero {
-    padding: 2rem 5%;
-    min-height: 70vh;
-    transition: background 0.5s ease;
-}
-
-
-.hero-image {
-    flex: 1 1 40%;
-    max-width: 400px;
-    height: auto;
-    background: url('/assets/imgindex.jpg') no-repeat center center;
-    background-size: cover;
-    border-radius: 20px;
-    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.3);
-}
-
 /* ---- 🎚️ Toggle Switch ---- */
 .toggle-container {
     display: flex;
@@ -128,20 +102,20 @@ body.light-mode .toggle-switch::before {
     left: calc(100% - 24px);
 }
 
-/* --- Styles pour la navigation --- */
+/*************** NAVIGATION *************/
 nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 1rem 2rem;
-    background-color: rgba(44, 44, 57, 0.1); /* Très léger fond */
+    background-color: rgba(44, 44, 57, 0.1); 
     backdrop-filter: blur(6px);
     -webkit-backdrop-filter: blur(6px);
     width: 80%;
     margin: auto;
     border-radius: 16px;
-    border: none; /* Plus de bordure */
-    box-shadow: none; /* Pas d’ombre visible */
+    border: none; 
+    box-shadow: none; 
 }
 
 .logo {
@@ -150,43 +124,43 @@ nav {
 }
 
 .logo img {
-    width: 7rem; /* Taille du logo */
+    width: 7rem;
     height: auto;
-    margin-right: 1rem; /* Espacement entre l'image et le titre */
+    margin-right: 1rem; 
 }
 
 nav h1 a {
     text-decoration: none;
-    color: #fff; /* Couleur du texte du logo */
+    color: #fff;
     font-size: 1.8rem;
 }
 
 .nav-links {
     display: flex;
-    list-style: none; /* Supprimer les puces */
+    list-style: none;
     margin: 0;
     padding: 0;
 }
 
 .nav-links li {
-    margin-left: 2rem; /* Espacement entre les liens */
+    margin-left: 2rem;
 }
 
 .nav-links li a {
     text-decoration: none;
-    color: #fff; /* Couleur des liens */
+    color: #fff;
     font-size: 1.2rem;
-    text-transform: uppercase; /* Mettre les liens en majuscule */
+    text-transform: uppercase;
 }
 
 .nav-links li a:hover {
-    color: #ff7f32; /* Couleur au survol */
+    color: #ff7f32;
 }
 
 
 /* --- Styles pour le menu burger (pour mobile) --- */
 .burger {
-    display: none; /* Caché par défaut sur les écrans larges */
+    display: none;
     flex-direction: column;
     gap: 5px;
     cursor: pointer;
@@ -237,21 +211,9 @@ nav h1 a {
 	color: #ffffff;
 }
 
-
-
-/* ---- 📌 Style des cartes ---- */
-/*.modules {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 20px;
-    padding: 2rem;
-} */
-
 .modules {
     padding: 2rem;
 }
-
 
 .card {
     width: 250px;
@@ -439,3 +401,6 @@ button:hover {
 }
 
 
+footer {
+	margin-top: 3rem;
+}

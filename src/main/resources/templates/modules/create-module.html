@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Créer un module</title>
+    <link rel="stylesheet" th:href="@{/css/global.css}">
+    <style>
+        .sous-module {
+            border: 1px solid #ccc;
+            padding: 1em;
+            margin-bottom: 1em;
+            border-radius: 8px;
+        }
+    </style>
+</head>
+<body>
+<div th:insert="~{fragments/header :: header}"></div>
+<div th:insert="~{fragments/nav :: nav}"></div>
+
+<div class="container">
+    <h2>Créer un nouveau module</h2>
+    <form th:action="@{/modules/save}" method="post">
+
+        <!-- Nom du module -->
+        <label>Nom du module :</label>
+        <input type="text" name="nom" required><br>
+
+        <!-- Image du module -->
+        <label>Chemin de l’image :</label>
+        <input type="text" name="imagePath"><br>
+
+        <!-- Sous-modules dynamiques -->
+        <h3>Sous-modules</h3>
+        <div id="sousModulesContainer">
+            <!-- Sous-modules ajoutés ici via JS -->
+        </div>
+
+        <button type="button" onclick="ajouterSousModule()">➕ Ajouter un sous-module</button><br><br>
+
+        <button type="submit" class="btn">Créer le module</button>
+    </form>
+</div>
+
+<div th:insert="~{fragments/footer :: footer}"></div>
+
+<script>
+    let index = 0;
+
+    function ajouterSousModule() {
+        const container = document.getElementById('sousModulesContainer');
+        const html = `
+        <div class="sous-module">
+            <label>Nom du sous-module :</label>
+            <input type="text" name="sousModules[${index}].nom" required><br>
+
+            <label>Chemin de l’image :</label>
+            <input type="text" name="sousModules[${index}].imagePath"><br>
+
+            <label>Cours :</label>
+            <select name="sousModules[${index}].coursId">
+                <option th:each="cours : ${coursList}" 
+                        th:value="${cours.id}" 
+                        th:text="${cours.nom}">
+                </option>
+            </select><br>
+
+            <label>Quiz :</label>
+            <select name="sousModules[${index}].quizId">
+                <option th:each="quiz : ${quizList}" 
+                        th:value="${quiz.id}" 
+                        th:text="${quiz.nom}">
+                </option>
+            </select><br>
+        </div>`;
+        container.insertAdjacentHTML('beforeend', html);
+        index++;
+    }
+</script>
+
+</body>
+</html>

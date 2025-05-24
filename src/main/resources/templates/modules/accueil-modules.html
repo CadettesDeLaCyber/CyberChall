@@ -27,7 +27,7 @@
 }
 
 .left-section img {
-	width: 300px;
+	width: 80%;
 	border-radius: 15px;
 }
 
@@ -90,6 +90,7 @@
 	margin: 20px 40px;
 	cursor: pointer;
 	color: white;
+	text-align: left;
 }
 </style>
 
@@ -110,7 +111,7 @@
 	<main class="module-container">
 
 		<div class="left-section">
-			<h2 th:text="${sousModule.titre}">1.2 Phishing</h2>
+			<h2 th:text="${sousModule.titre}">Titre</h2>
 			<img th:src="@{${sousModule.imageUrl}}" alt="Image du sous-module" />
 		</div>
 
@@ -119,6 +120,7 @@
 				en quelques phrases. Explication du cours en quelques phrases.
 				Explication du cours en quelques phrases.</p>
 			<!-- 
+			Liens des boutons a généréer dynamiquement selon l'id du module
 			<div class="buttons">
 				<button>Cours</button>
 				<button>Challenge</button>

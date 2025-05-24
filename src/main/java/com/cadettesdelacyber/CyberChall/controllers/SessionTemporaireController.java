@@ -59,7 +59,9 @@ public class SessionTemporaireController {
             sessionTemp.setQrCodeBase64(qrCodeBase64); // Ajouter le QR code à la session
         }
 
-        model.addAttribute("sessions", sessions); // Ajouter la liste des sessions à afficher
+        //model.addAttribute("sessions", sessions); // Ajouter la liste des sessions à afficher
+        model.addAttribute("sessionTemporaires", sessions);
+
         return "session/session"; // Afficher la page de gestion des sessions
     }
 

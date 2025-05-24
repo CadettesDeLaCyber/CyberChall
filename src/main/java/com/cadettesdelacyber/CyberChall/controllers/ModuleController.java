@@ -59,4 +59,6 @@ public class ModuleController {
         moduleService.addSousModule(moduleId, sousModule);
         return "redirect:/modules";
     }
+    
+    
 }
