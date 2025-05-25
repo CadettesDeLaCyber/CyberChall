@@ -72,10 +72,18 @@ public class SessionTemporaireController {
         if (admin == null) {
             return "redirect:/"; // Si l'admin n'est pas connecté, rediriger vers la page de login
         }
+        
+     // ✅ LOG 1 : Affiche les IDs reçus du formulaire
+        System.out.println("📥 IDs de modules reçus : " + moduleIds);
 
         // ✅ Récupérer les modules sélectionnés
         List<Module> modules = moduleService.getModuleByIds(moduleIds);
 
+     // ✅ LOG 2 : Vérifie les modules récupérés
+        System.out.println("📦 Modules récupérés depuis la base :");
+        for (Module m : modules) {
+            System.out.println(" - " + m.getNom());
+        }
         // ✅ Créer la session temporaire
         if (modules.size() < 2 || modules.size() > 4) {
             throw new IllegalArgumentException("La session doit contenir entre 2 et 4 modules.");
@@ -84,12 +92,18 @@ public class SessionTemporaireController {
         SessionTemporaire sessionTemporaire = new SessionTemporaire();
         sessionTemporaire.setToken(UUID.randomUUID().toString()); // Générer un token unique pour la session
         sessionTemporaire.setDateCreation(LocalDateTime.now());
-        sessionTemporaire.setDateExpiration(LocalDateTime.now().plusMonths(1)); // Expiration après 1 mois
+        sessionTemporaire.setDuree(1); // Expiration après 1 mois
         sessionTemporaire.setModules(modules); // Associer les modules à la session
         sessionTemporaire.setAdmin(admin); // Lier cette session à l'admin
 
         sessionTemporaireRepository.save(sessionTemporaire); // Sauvegarder la session en base de données
-
+        
+        // ✅ LOG 3 : Confirmation de sauvegarde
+        System.out.println("✅ Session créée avec ID : " + sessionTemporaire.getId());
+        System.out.println("📌 Modules associés à la session :");
+        for (Module m : sessionTemporaire.getModules()) {
+            System.out.println(" - " + m.getNom());
+        }
         // Rediriger vers la page de gestion des sessions avec les sessions mises à jour
         return "redirect:/session/session"; // Rediriger après la création
     }
@@ -100,9 +114,11 @@ public class SessionTemporaireController {
     public String accederSession(@PathVariable String token, @RequestParam List<Long> modules, Model model) {
         Optional<SessionTemporaire> sessionTempOpt = sessionTemporaireService.getSessionParToken(token);
 
+        //a implemenetr plus tard
+        /*
         if (sessionTempOpt.isEmpty() || sessionTempOpt.get().getDateExpiration().isBefore(LocalDateTime.now())) {
             return "redirect:/session/session"; // Si la session est expirée ou introuvable, rediriger vers la page de gestion des sessions
-        }
+        } */
 
         SessionTemporaire sessionTemp = sessionTempOpt.get();
 
@@ -135,6 +151,17 @@ public class SessionTemporaireController {
         model.addAttribute("qrCodeBase64", qrCodeBase64); // Passer le QR code à la vue
 
         return "session/accueil-temporaire"; // Afficher la page d'accueil temporaire pour cette session
+    }
+
+    @GetMapping("/supprimer/{id}")
+    public String supprimerSession(@PathVariable Long id, HttpSession httpSession) {
+        Admin admin = (Admin) httpSession.getAttribute("admin");
+        if (admin == null) {
+            return "redirect:/";
+        }
+
+        sessionTemporaireService.supprimerParId(id);
+        return "redirect:/session/session";
     }
 
     

@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 
-import com.cadettesdelacyber.CyberChall.services.SessionService;
+import com.cadettesdelacyber.CyberChall.services.SessionTemporaireService;
 
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
@@ -14,13 +14,13 @@ import jakarta.servlet.http.HttpServletResponse;
 public class SessionInterceptor implements HandlerInterceptor {
 
     @Autowired
-    private SessionService sessionService;
+    private SessionTemporaireService sessionTemporaireService;
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         // Utilisation des méthodes de SessionService pour obtenir le rôle et le username depuis la session
-        String role = sessionService.getRoleByToken(request);
-        String username = sessionService.getUsernameByToken(request);
+        String role = sessionTemporaireService.getRoleByToken(request);
+        String username = sessionTemporaireService.getUsernameByToken(request);
 
         // Si le rôle et le username sont récupérés correctement, on les ajoute dans les attributs de la requête
         if (role != null && username != null) {

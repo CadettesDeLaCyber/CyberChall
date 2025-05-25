@@ -28,10 +28,6 @@ public class SousModule {
 	@ManyToOne
     @JoinColumn(name = "module_id")
     private Module module;
-	
-
-	@ManyToMany(mappedBy = "sousModules")
-	private List<Session> sessions;
 
 	//lien de redirection vers le sous-module en particulier (page de détails : base + quizz)
     private String link;
@@ -55,14 +51,13 @@ public class SousModule {
 		
 	}
 
-	public SousModule(Long id, String titre,  String imageUrl,Module module, List<Session> sessions, String link, Cours cours,
+	public SousModule(Long id, String titre,  String imageUrl,Module module, String link, Cours cours,
 			Quizz quizz, Challenge challenge) {
 		super();
 		this.id = id;
 		this.titre = titre;
 		this.imageUrl = imageUrl;
 		this.module = module;
-		this.sessions = sessions;
 		this.link = link;
 		this.cours = cours;
 		this.quizz = quizz;
@@ -101,14 +96,6 @@ public class SousModule {
 		this.module = module;
 	}
 
-	public List<Session> getSessions() {
-		return sessions;
-	}
-
-	public void setSessions(List<Session> sessions) {
-		this.sessions = sessions;
-	}
-
 	public String getLink() {
 		return link;
 	}
@@ -140,6 +127,5 @@ public class SousModule {
 	public void setChallenge(Challenge challenge) {
 		this.challenge = challenge;
 	}
-
 	
 }

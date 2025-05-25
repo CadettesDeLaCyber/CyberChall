@@ -12,68 +12,67 @@ import jakarta.persistence.ManyToMany;
 
 import jakarta.persistence.*;
 
-
 @Entity
+@Table(name = "session")
 public class SessionTemporaire {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
 
-    @Column(unique = true, nullable = false)
-    private String token;
+	@Column(unique = true, nullable = false)
+	private String token;
 
-    private LocalDateTime dateCreation;
-    private LocalDateTime dateExpiration;
-    
-    @ManyToOne
-    @JoinColumn(name = "admin_id")
-    private Admin admin; // Relation avec l'admin qui a créé la session
-
-    @ManyToMany
-    @JoinTable(
-        name = "session_module",
-        joinColumns = @JoinColumn(name = "session_id"),
-        inverseJoinColumns = @JoinColumn(name = "module_id")
-    )
-    private List<Module> modules; 
-    
-    @Transient
-    private String qrCodeBase64;
- 
-    
-	public SessionTemporaire() {
+	private LocalDateTime dateCreation;
 	
+	@Column(nullable = false)
+    private int duree;
+
+	@ManyToOne
+	@JoinColumn(name = "admin_id")
+	private Admin admin; // Relation avec l'admin qui a créé la session
+
+	@ManyToMany
+	@JoinTable(name = "session_temporaire_module", 
+	joinColumns = @JoinColumn(name = "session_temporaire_id"), 
+	inverseJoinColumns = @JoinColumn(name = "module_id"))
+	private List<Module> modules;
+
+
+	@Transient
+	private String qrCodeBase64;
+
+	public SessionTemporaire() {
+
 	}
 
-	public SessionTemporaire(String token, LocalDateTime dateCreation, LocalDateTime dateExpiration, Admin admin,
+	public SessionTemporaire(String token, LocalDateTime dateCreation, int duree, Admin admin,
 			List<Module> modules) {
-		super();
 		this.token = token;
 		this.dateCreation = dateCreation;
-		this.dateExpiration = dateExpiration;
+		this.duree = duree;
 		this.admin = admin;
 		this.modules = modules;
 	}
 
-	public SessionTemporaire(Long id, String token, LocalDateTime dateCreation, LocalDateTime dateExpiration,
+	public SessionTemporaire(Long id, String token, LocalDateTime dateCreation, int duree,
 			Admin admin, List<Module> modules) {
 		super();
 		this.id = id;
 		this.token = token;
 		this.dateCreation = dateCreation;
-		this.dateExpiration = dateExpiration;
+		this.duree = duree;
 		this.admin = admin;
 		this.modules = modules;
 	}
 
-	public SessionTemporaire(Long id, String token, LocalDateTime dateCreation, LocalDateTime dateExpiration,
+	public SessionTemporaire(Long id, String token, LocalDateTime dateCreation, int duree, 
 			Admin admin, List<Module> modules, String qrCodeBase64) {
 		super();
 		this.id = id;
 		this.token = token;
 		this.dateCreation = dateCreation;
-		this.dateExpiration = dateExpiration;
+		this.duree = duree;
 		this.admin = admin;
 		this.modules = modules;
 		this.qrCodeBase64 = qrCodeBase64;
@@ -86,14 +85,14 @@ public class SessionTemporaire {
 	public void setAdmin(Admin admin) {
 		this.admin = admin;
 	}
-	
-	   public String getQrCodeBase64() {
-	        return qrCodeBase64;
-	    }
 
-	    public void setQrCodeBase64(String qrCodeBase64) {
-	        this.qrCodeBase64 = qrCodeBase64;
-	    }
+	public String getQrCodeBase64() {
+		return qrCodeBase64;
+	}
+
+	public void setQrCodeBase64(String qrCodeBase64) {
+		this.qrCodeBase64 = qrCodeBase64;
+	}
 
 	public Long getId() {
 		return id;
@@ -119,12 +118,12 @@ public class SessionTemporaire {
 		this.dateCreation = dateCreation;
 	}
 
-	public LocalDateTime getDateExpiration() {
-		return dateExpiration;
+	public int getDuree() {
+		return duree;
 	}
 
-	public void setDateExpiration(LocalDateTime dateExpiration) {
-		this.dateExpiration = dateExpiration;
+	public void setDuree(int duree) {
+		this.duree = duree;
 	}
 
 	public List<Module> getModules() {
@@ -134,5 +133,5 @@ public class SessionTemporaire {
 	public void setModules(List<Module> modules) {
 		this.modules = modules;
 	}
- 
+
 }

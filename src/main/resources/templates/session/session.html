@@ -2,8 +2,8 @@
 <html lang="fr" xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <link rel="stylesheet" th:href="@{/css/pages/session.css}">
-    
+<link rel="stylesheet" th:href="@{/css/pages/session.css}">
+
 </head>
 
 <div th:insert="~{fragments/header :: header}"></div>
@@ -22,8 +22,8 @@
 			<div class="modules-container">
 				<div class="module-option" th:each="module : ${modules}">
 					<input type="checkbox" name="moduleIds" th:value="${module.id}"
-						th:id="|mod__${module.id}|" hidden> 
-					<label class="module-button" th:for="|mod__${module.id}|"
+						th:id="|mod__${module.id}|" hidden> <label
+						class="module-button" th:for="|mod__${module.id}|"
 						th:text="${module.nom}"></label>
 				</div>
 			</div>
@@ -35,22 +35,6 @@
 
 	</div>
 	<hr />
-
-	<!-- fragments/sessions-fragment.html -->
-
-	<!-- 
-		<div th:fragment="sessionsSection">
-    <h2>Mes sessions créées :</h2>
-    <div th:each="sessionTemporaire : ${sessionTemporaires}">
-        <p><strong>Date de création:</strong> <span th:text="${sessionTemporaire.dateCreation}"></span></p>
-        <p><strong>Modules :</strong> 
-            <span th:each="module : ${sessionTemporaire.modules}" th:text="${module.nom}"></span>
-        </p>
-        <img th:src="|data:image/png;base64,${sessionTemporaire.qrCodeBase64}|" alt="QR Code">
-    </div>
-</div>
-		 -->
-
 
 	<!-- session/session.html -->
 	<div th:fragment="sessionsSection">
@@ -70,7 +54,9 @@
 						<th>Date</th>
 						<th>Modules selectionnés</th>
 						<th>QrCode</th>
+						<!-- <th>Lien d'accès</th> -->
 						<th>Action</th>
+
 					</tr>
 				</thead>
 				<tbody>
@@ -86,9 +72,15 @@
 							</div>
 						</td>
 
-						<td><img
-							th:src="|data:image/png;base64,${sessionTemporaire.qrCodeBase64}|"
-							alt="QR Code"></td>
+						<td><img th:src="${sessionTemporaire.qrCodeBase64}" alt="QR Code"></td>
+					
+						<td><a
+							th:href="@{'/session/supprimer/' + ${sessionTemporaire.id}}"
+							title="Supprimer"
+							onclick="return confirm('⚠️ Êtes-vous sûr de vouloir supprimer cette session ?');">
+								<i class="bi bi-trash"
+								style="color: #dc3545; font-size: 1.3rem;"></i>
+						</a></td>
 					</tr>
 				</tbody>
 			</table>

@@ -8,10 +8,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.cadettesdelacyber.CyberChall.models.Admin;
-import com.cadettesdelacyber.CyberChall.models.Session;
+import com.cadettesdelacyber.CyberChall.models.Module;
 import com.cadettesdelacyber.CyberChall.models.SessionTemporaire;
 import com.cadettesdelacyber.CyberChall.models.SousModule;
-import com.cadettesdelacyber.CyberChall.services.SessionService;
 import com.cadettesdelacyber.CyberChall.services.SessionTemporaireService;
 import com.cadettesdelacyber.CyberChall.utils.QrCodeUtils;
 import com.cadettesdelacyber.CyberChall.services.AdminService;
@@ -20,6 +19,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -28,13 +28,11 @@ import java.util.Map;
 public class AccountController {
 
     @Autowired
-    private SessionService sessionService;
+    private SessionTemporaireService sessionTemporaireService;
 
     @Autowired
     private AdminService adminService;
     
-    @Autowired
-    private  SessionTemporaireService sessionTemporaireService;
 
     // Page principale de compte - accessible uniquement si connecté
     @GetMapping("/admin/account")
@@ -43,10 +41,6 @@ public class AccountController {
         if (admin == null) {
             return "redirect:/admin/connexion-admin";
         }
-
-        // Sessions classiques
-        List<Session> sessions = sessionService.findByAdmin(admin);
-        model.addAttribute("sessions", sessions);
 
         // Sessions temporaires
         List<SessionTemporaire> sessionTemporaires = sessionTemporaireService.getSessionsParAdmin(admin);
@@ -68,48 +62,16 @@ public class AccountController {
         return "admin/account";
     }
 
-    
-    @PostMapping("/admin/account")
-    public String createSessionForAccount(@RequestParam String titre,
-                                          @RequestParam String description,
-                                          @RequestParam List<SousModule> sousModules,
-                                          @RequestParam String dateDebut,
-                                          @RequestParam int duree,
-                                          @RequestParam String token,
-                                          @RequestParam Long id,
-                                          HttpServletRequest request) {
-
-        // Vérification de la session utilisateur, récupération de l'admin connecté
-        HttpSession session = request.getSession(false);
-        if (session == null || session.getAttribute("username") == null) {
-            return "redirect:/";  // Si l'utilisateur n'est pas connecté, redirige vers la page de connexion
-        }
-
-        String username = (String) session.getAttribute("username");
-        Admin admin = adminService.findByUsername(username); // Récupère l'admin
-
-        // Création de la session avec les paramètres récupérés
-        Session newSession = sessionService.createSession(
-            LocalDate.parse(dateDebut), // Conversion de la date
-            duree,  // Durée (en mois)
-            token,  // Le token de la session
-            sousModules,  // Liste des sous-modules
-            admin  // L'admin connecté
-        );
-
-        // Redirection vers la page account (n'oubliez pas avec un message de session créée)
-        return "redirect:/admin/account";  // Renvoie vers la page 'account' pour afficher la/les session-s créée-s
-    }
 
 
     // GET - Afficher le formulaire de création de compte
-    @GetMapping("/create-account")
+    @GetMapping("/admin/create-account")
     public String showCreateAccount() {
         return "admin/create-account";
     }
 
     // POST - Traiter le formulaire de création ( EVOLUTION : A FAIRE AVEC EMAIL PLUTOT QUE USERNAME)
-    @PostMapping("/create-account")
+    @PostMapping("admin/create-account")
     public String createAccount(@RequestParam String username,
                                 @RequestParam String password,
                                 Model model) {

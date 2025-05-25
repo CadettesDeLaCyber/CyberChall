@@ -15,18 +15,18 @@ public class Admin {
     private String password;
 
     @OneToMany(mappedBy = "admin", cascade = CascadeType.ALL)
-    private List<Session> sessions;
+    private List<SessionTemporaire> sessionsTemporaire;
      
 
     public Admin() {
 	
 	}
 
-	public Admin(Long id, String username, String password, List<Session> sessions) {
+	public Admin(Long id, String username, String password, List<SessionTemporaire> sessionsTemporaire) {
 		this.id = id;
 		this.username = username;
 		this.password = password;
-		this.sessions = sessions;
+		this.sessionsTemporaire = sessionsTemporaire;
 	}
 
 	// Getters / setters
@@ -50,11 +50,11 @@ public class Admin {
         this.password = password;
     }
 
-    public List<Session> getSessions() {
-        return sessions;
+    public List<SessionTemporaire> getSessions() {
+        return sessionsTemporaire;
     }
 
-    public void setSessions(List<Session> sessions) {
-        this.sessions = sessions;
+    public void setSessions(List<SessionTemporaire> sessionsTemporaire) {
+        this.sessionsTemporaire = sessionsTemporaire;
     }
 }

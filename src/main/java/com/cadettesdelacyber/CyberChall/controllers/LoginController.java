@@ -2,7 +2,8 @@ package com.cadettesdelacyber.CyberChall.controllers;
 
 import com.cadettesdelacyber.CyberChall.models.Admin;
 import com.cadettesdelacyber.CyberChall.services.AdminService;
-import com.cadettesdelacyber.CyberChall.services.SessionService;
+import com.cadettesdelacyber.CyberChall.services.SessionTemporaireService;
+
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class LoginController {
 
     @Autowired
-    private SessionService sessionService;
+    private SessionTemporaireService sessionTemporaireService;
     
     @Autowired
     private AdminService adminService;
@@ -35,7 +36,7 @@ public class LoginController {
         System.out.println("🔐 Tentative de login ADMIN avec : " + username + " / " + password);
 
         // Vérification de l'authentification dans le service
-        boolean isAuthenticated = sessionService.authenticate(username, password);
+        boolean isAuthenticated = sessionTemporaireService.authenticate(username, password);
 
         if (isAuthenticated) {
             Admin admin = adminService.findByUsername(username);  // Récupère l'objet admin
