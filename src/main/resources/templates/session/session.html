@@ -54,7 +54,7 @@
 						<th>Date</th>
 						<th>Modules selectionnés</th>
 						<th>QrCode</th>
-						<!-- <th>Lien d'accès</th> -->
+						<th>Lien</th>
 						<th>Action</th>
 
 					</tr>
@@ -72,8 +72,15 @@
 							</div>
 						</td>
 
-						<td><img th:src="${sessionTemporaire.qrCodeBase64}" alt="QR Code"></td>
-					
+						<td><img th:src="${sessionTemporaire.qrCodeBase64}"
+							alt="QR Code"></td>
+
+						<td><a th:href="${sessionTemporaire.urlModules}"
+							target="_blank"> Accéder à la session </a> <br />
+							<p>
+								Lien d'accès : <span th:text="${sessionTemporaire.urlModules}"></span>
+							</p></td>
+							<!--  exemple de Lien d'accès : http://localhost:4040/accueil-temporaire?modules=69&modules=71 -->
 						<td><a
 							th:href="@{'/session/supprimer/' + ${sessionTemporaire.id}}"
 							title="Supprimer"

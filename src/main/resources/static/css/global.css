@@ -284,7 +284,6 @@ button:hover {
 	text-decoration: none;
 }
 
-
 /************************ NAV ****************************/
 .nav-links {
   display: flex;
@@ -399,7 +398,6 @@ button:hover {
     text-align: center; /* Centre les liens */
   }
 }
-
 
 footer {
 	margin-top: 3rem;

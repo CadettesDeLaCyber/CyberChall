@@ -110,10 +110,13 @@ public class SessionTemporaireService {
 		}
 		return null;
 	}
-	
+
 	public void supprimerParId(Long id) {
-	    sessionTemporaireRepository.deleteById(id);
+		sessionTemporaireRepository.deleteById(id);
 	}
 
+    public SessionTemporaire findById(Long id) {
+        return sessionTemporaireRepository.findById(id).orElse(null);
+    }
 
 }

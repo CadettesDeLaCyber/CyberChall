@@ -10,19 +10,16 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.cadettesdelacyber.CyberChall.models.Admin;
 import com.cadettesdelacyber.CyberChall.models.Module;
 import com.cadettesdelacyber.CyberChall.models.SessionTemporaire;
-import com.cadettesdelacyber.CyberChall.models.SousModule;
 import com.cadettesdelacyber.CyberChall.services.SessionTemporaireService;
 import com.cadettesdelacyber.CyberChall.utils.QrCodeUtils;
 import com.cadettesdelacyber.CyberChall.services.AdminService;
 
-import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @Controller
 public class AccountController {
@@ -34,7 +31,6 @@ public class AccountController {
     private AdminService adminService;
     
 
-    // Page principale de compte - accessible uniquement si connecté
     @GetMapping("/admin/account")
     public String afficherCompte(HttpSession sessionHttp, Model model) {
         Admin admin = (Admin) sessionHttp.getAttribute("admin");
@@ -42,17 +38,22 @@ public class AccountController {
             return "redirect:/admin/connexion-admin";
         }
 
-        // Sessions temporaires
         List<SessionTemporaire> sessionTemporaires = sessionTemporaireService.getSessionsParAdmin(admin);
-        System.out.println("Sessions temporaires : " + sessionTemporaires.size());
         model.addAttribute("sessionTemporaires", sessionTemporaires);
 
-        Map<String, String> qrCodes = new HashMap<>();
         for (SessionTemporaire s : sessionTemporaires) {
+            // ✅ Générer le lien avec les modules sélectionnés
+            String url = s.getModules().stream()
+                .map(Module::getId)
+                .map(id -> "modules=" + id)
+                .collect(Collectors.joining("&", "http://localhost:4040/session/accueil-temporaire?", ""));
+            
+            s.setUrlModules(url); // pour affichage
+
+            // ✅ Générer le QR code avec ce même lien
             try {
-                String url = "http://localhost:4040/admin/accueil-admin?" + s.getToken();
                 String qrBase64 = QrCodeUtils.generateQRCodeBase64(url, 200, 200);
-                s.setQrCodeBase64(qrBase64);  // bien s'assurer que l'objet a un champ pour ça
+                s.setQrCodeBase64(qrBase64);
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -61,7 +62,6 @@ public class AccountController {
         model.addAttribute("admin", admin);
         return "admin/account";
     }
-
 
 
     // GET - Afficher le formulaire de création de compte

@@ -6,132 +6,125 @@ import java.util.List;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
-
-import jakarta.persistence.*;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.Transient;
 
 @Entity
 @Table(name = "session")
 public class SessionTemporaire {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-	@Column(unique = true, nullable = false)
-	private String token;
+    @Column(unique = true, nullable = false)
+    private String token;
 
-	private LocalDateTime dateCreation;
-	
-	@Column(nullable = false)
+    private LocalDateTime dateCreation;
+
+    @Column(nullable = false)
     private int duree;
 
-	@ManyToOne
-	@JoinColumn(name = "admin_id")
-	private Admin admin; // Relation avec l'admin qui a créé la session
+    @ManyToOne
+    @JoinColumn(name = "admin_id")
+    private Admin admin;
 
-	@ManyToMany
-	@JoinTable(name = "session_temporaire_module", 
-	joinColumns = @JoinColumn(name = "session_temporaire_id"), 
-	inverseJoinColumns = @JoinColumn(name = "module_id"))
-	private List<Module> modules;
+    @ManyToMany
+    @JoinTable(name = "session_temporaire_module", 
+        joinColumns = @JoinColumn(name = "session_temporaire_id"), 
+        inverseJoinColumns = @JoinColumn(name = "module_id"))
+    private List<Module> modules;
 
+    @Transient
+    private String qrCodeBase64;
 
-	@Transient
-	private String qrCodeBase64;
+    @Transient
+    private String urlModules;
 
-	public SessionTemporaire() {
+    @Transient
+    private String modulesParams;
 
-	}
+    public Long getId() {
+        return id;
+    }
 
-	public SessionTemporaire(String token, LocalDateTime dateCreation, int duree, Admin admin,
-			List<Module> modules) {
-		this.token = token;
-		this.dateCreation = dateCreation;
-		this.duree = duree;
-		this.admin = admin;
-		this.modules = modules;
-	}
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-	public SessionTemporaire(Long id, String token, LocalDateTime dateCreation, int duree,
-			Admin admin, List<Module> modules) {
-		super();
-		this.id = id;
-		this.token = token;
-		this.dateCreation = dateCreation;
-		this.duree = duree;
-		this.admin = admin;
-		this.modules = modules;
-	}
+    public String getToken() {
+        return token;
+    }
 
-	public SessionTemporaire(Long id, String token, LocalDateTime dateCreation, int duree, 
-			Admin admin, List<Module> modules, String qrCodeBase64) {
-		super();
-		this.id = id;
-		this.token = token;
-		this.dateCreation = dateCreation;
-		this.duree = duree;
-		this.admin = admin;
-		this.modules = modules;
-		this.qrCodeBase64 = qrCodeBase64;
-	}
+    public void setToken(String token) {
+        this.token = token;
+    }
 
-	public Admin getAdmin() {
-		return admin;
-	}
+    public LocalDateTime getDateCreation() {
+        return dateCreation;
+    }
 
-	public void setAdmin(Admin admin) {
-		this.admin = admin;
-	}
+    public void setDateCreation(LocalDateTime dateCreation) {
+        this.dateCreation = dateCreation;
+    }
 
-	public String getQrCodeBase64() {
-		return qrCodeBase64;
-	}
+    @Transient
+    public boolean isExpired() {
+        return LocalDateTime.now().isAfter(this.getDateExpiration());
+    }
 
-	public void setQrCodeBase64(String qrCodeBase64) {
-		this.qrCodeBase64 = qrCodeBase64;
-	}
+    @Transient
+    public LocalDateTime getDateExpiration() {
+        return this.dateCreation.plusDays(this.duree);
+    }
 
-	public Long getId() {
-		return id;
-	}
+    public void setDuree(int duree) {
+        this.duree = duree;
+    }
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+    public Admin getAdmin() {
+        return admin;
+    }
 
-	public String getToken() {
-		return token;
-	}
+    public void setAdmin(Admin admin) {
+        this.admin = admin;
+    }
 
-	public void setToken(String token) {
-		this.token = token;
-	}
+    public List<Module> getModules() {
+        return modules;
+    }
 
-	public LocalDateTime getDateCreation() {
-		return dateCreation;
-	}
+    public void setModules(List<Module> modules) {
+        this.modules = modules;
+    }
 
-	public void setDateCreation(LocalDateTime dateCreation) {
-		this.dateCreation = dateCreation;
-	}
+    public String getQrCodeBase64() {
+        return qrCodeBase64;
+    }
 
-	public int getDuree() {
-		return duree;
-	}
+    public void setQrCodeBase64(String qrCodeBase64) {
+        this.qrCodeBase64 = qrCodeBase64;
+    }
 
-	public void setDuree(int duree) {
-		this.duree = duree;
-	}
+    public String getUrlModules() {
+        return urlModules;
+    }
 
-	public List<Module> getModules() {
-		return modules;
-	}
+    public void setUrlModules(String urlModules) {
+        this.urlModules = urlModules;
+    }
 
-	public void setModules(List<Module> modules) {
-		this.modules = modules;
-	}
+    public String getModulesParams() {
+        return modulesParams;
+    }
 
+    public void setModulesParams(String modulesParams) {
+        this.modulesParams = modulesParams;
+    }
 }
