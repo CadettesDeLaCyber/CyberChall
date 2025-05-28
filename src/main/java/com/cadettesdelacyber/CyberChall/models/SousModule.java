@@ -1,13 +1,10 @@
 package com.cadettesdelacyber.CyberChall.models;
 
-import java.util.List;
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
@@ -15,44 +12,45 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name = "sous_module")
 public class SousModule {
-	
-	@Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-	
-	private String titre;
-	
-	private String imageUrl;
-	
-	//Foreign Key to Module
-	@ManyToOne
-    @JoinColumn(name = "module_id")
-    private Module module;
 
-	//lien de redirection vers le sous-module en particulier (page de détails : base + quizz)
-    private String link;
-	
-	//Foreign Key to Cours
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
+
+	private String titre;
+
+	private String imageUrl;
+
+	// Foreign Key to Module
+	@ManyToOne
+	@JoinColumn(name = "module_id")
+	private Module module;
+
+	// lien de redirection vers le sous-module en particulier (page de détails :
+	// base + quizz)
+	private String link;
+
+	// Foreign Key to Cours
 	@OneToOne
 	@JoinColumn(name = "cours_id")
 	private Cours cours;
-	
-	//Foreign Key to Quizz
+
+	// Foreign Key to Quizz
 	@OneToOne
 	@JoinColumn(name = "quizz_id")
 	private Quizz quizz;
-	
-	//Foreign Key to Challenge
+
+	// Foreign Key to Challenge
 	@OneToOne
 	@JoinColumn(name = "challenge_id")
 	private Challenge challenge;
 
 	public SousModule() {
-		
+
 	}
 
-	public SousModule(Long id, String titre,  String imageUrl,Module module, String link, Cours cours,
-			Quizz quizz, Challenge challenge) {
+	public SousModule(Long id, String titre, String imageUrl, Module module, String link, Cours cours, Quizz quizz,
+			Challenge challenge) {
 		super();
 		this.id = id;
 		this.titre = titre;
@@ -127,5 +125,5 @@ public class SousModule {
 	public void setChallenge(Challenge challenge) {
 		this.challenge = challenge;
 	}
-	
+
 }

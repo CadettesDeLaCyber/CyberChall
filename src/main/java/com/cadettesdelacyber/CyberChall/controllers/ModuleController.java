@@ -60,5 +60,4 @@ public class ModuleController {
         return "redirect:/modules";
     }
     
-    
 }

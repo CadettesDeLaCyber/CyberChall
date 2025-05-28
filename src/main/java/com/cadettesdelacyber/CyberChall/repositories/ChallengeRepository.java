@@ -6,4 +6,5 @@ import org.springframework.stereotype.Repository;
 import com.cadettesdelacyber.CyberChall.models.Challenge;
 
 @Repository
-public interface ChallengeRepository extends JpaRepository<Challenge, Long> {}
+public interface ChallengeRepository extends JpaRepository<Challenge, Long> {
+}

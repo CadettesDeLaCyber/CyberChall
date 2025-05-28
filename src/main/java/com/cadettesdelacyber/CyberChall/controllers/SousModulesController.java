@@ -1,6 +1,5 @@
 package com.cadettesdelacyber.CyberChall.controllers;
 
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -31,8 +30,6 @@ public class SousModulesController {
 	    model.addAttribute("sousModule", sousModule); // ✅ PAS juste sousModule.getImageUrl()
 	    return "modules/accueil-modules";
 	}
-
-
 	
 	// ============================================================
     // Section 1: Sous-modules Cyberattaques : Affichages ==> GET

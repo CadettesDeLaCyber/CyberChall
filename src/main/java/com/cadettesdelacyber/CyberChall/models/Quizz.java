@@ -11,20 +11,18 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name = "quizz")
 public class Quizz {
-	
+
 	@Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    private String questions;  
-   
-    @OneToOne
-    @JoinColumn(name = "sousmodule_id", unique = true)
-    private SousModule sousModule;
-    
-    
-    
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
+	private String questions;
+
+	@OneToOne
+	@JoinColumn(name = "sousmodule_id", unique = true)
+	private SousModule sousModule;
+
 	public Quizz() {
-	
+
 	}
 
 	public Quizz(Long id, String questions, SousModule sousModule) {
@@ -57,6 +55,5 @@ public class Quizz {
 	public void setSousModule(SousModule sousModule) {
 		this.sousModule = sousModule;
 	}
-
 
 }

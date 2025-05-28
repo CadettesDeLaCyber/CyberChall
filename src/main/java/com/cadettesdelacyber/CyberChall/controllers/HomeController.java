@@ -25,7 +25,7 @@ public class HomeController {
 	private SousModuleService sousModuleService;
 
     // ============================================================
-    // Section 1: Page d'accueil --> connexion (si connecté -->accueil-admin
+    // Section 1: Page d'accueil --> connexion (si connecté --> accueil-admin
     // ============================================================
 
 	@GetMapping("/")
@@ -76,7 +76,7 @@ public class HomeController {
 	        return "redirect:/";
 	    }
 	    
-	    return "admin/accueil-admin";  // Le même template, mais logique conditionnelle dans Thymeleaf
+	    return "admin/accueil-admin";  
 	}
 
     // ============================================================
@@ -147,7 +147,6 @@ public class HomeController {
     public String afficherChallengeMotdepasse() {
         return "modules/cyberattaque/challenge-motdepasse";
     }
-
 
     // ============================================================
     // Section 7: Contact

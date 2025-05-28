@@ -9,11 +9,9 @@ import com.cadettesdelacyber.CyberChall.models.Admin;
 import com.cadettesdelacyber.CyberChall.models.SessionTemporaire;
 
 public interface SessionTemporaireRepository extends JpaRepository<SessionTemporaire, Long> {
-    Optional<SessionTemporaire> findByToken(String token);
-    
- // Cette méthode permet de récupérer les sessions créées par un administrateur spécifique
-    List<SessionTemporaire> findByAdmin(Admin admin);
-    
+	Optional<SessionTemporaire> findByToken(String token);
+
+	// Permet de récupérer les sessions créées par un administrateur spécifique
+	List<SessionTemporaire> findByAdmin(Admin admin);
+
 }
-
-

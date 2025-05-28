@@ -32,34 +32,18 @@ public class SessionTemporaireService {
 
 	// === Authentification ===
 	public boolean authenticate(String username, String password) {
-		Admin admin = adminRepository.findByUsername(username); // Recherche de l'admin en base
+		Admin admin = adminRepository.findByUsername(username);
 		if (admin != null) {
-			return passwordEncoder.matches(password, admin.getPassword()); // Comparaison du mot de passe en clair avec
-																			// celui encodé
+			return passwordEncoder.matches(password, admin.getPassword());
+
 		}
 		return false; // L'admin n'existe pas ou le mot de passe est incorrect
 	}
 
-	// Ajouter cette méthode pour récupérer toutes les sessions par un
-	// administrateur
 	public List<SessionTemporaire> getSessionsParAdmin(Admin admin) {
 		return sessionTemporaireRepository.findByAdmin(admin);
 	}
 
-	// 🔹 Créer une session temporaire
-	/*
-	 * public SessionTemporaire creerSessionTemporaire(List<Module> modules) { if
-	 * (modules.size() < 2 || modules.size() > 4) { throw new
-	 * IllegalArgumentException("La session doit contenir entre 2 et 4 modules."); }
-	 * 
-	 * SessionTemporaire session = new SessionTemporaire();
-	 * session.setToken(UUID.randomUUID().toString()); // Génère un token unique
-	 * pour la session session.setDateCreation(LocalDateTime.now());
-	 * session.setModules(modules); // Associe les modules à la session
-	 * 
-	 * // Sauvegarde la session temporaire en base de données return
-	 * sessionTemporaireRepository.save(session); }
-	 */
 	public SessionTemporaire creerSessionTemporaire(List<Module> modules, Admin admin) {
 		if (modules.size() < 2 || modules.size() > 4) {
 			throw new IllegalArgumentException("La session doit contenir entre 2 et 4 modules.");
@@ -115,8 +99,8 @@ public class SessionTemporaireService {
 		sessionTemporaireRepository.deleteById(id);
 	}
 
-    public SessionTemporaire findById(Long id) {
-        return sessionTemporaireRepository.findById(id).orElse(null);
-    }
+	public SessionTemporaire findById(Long id) {
+		return sessionTemporaireRepository.findById(id).orElse(null);
+	}
 
 }

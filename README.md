@@ -7,7 +7,7 @@ Cette application web vise à sensibiliser les élèves à une thématique parti
 - **Spring Boot** (Back-end)
 - **Thymeleaf** (Templates HTML)
 - **Spring Data JPA** (Base de données relationnelle)
-- **H2 Database** (Base de données en mémoire pour le développement)
+- **MySql** (Base de données en mémoire pour le développement)
 - **GitHub** (Gestion du code source)
 
 ## Installation et Exécution
@@ -18,7 +18,7 @@ Cette application web vise à sensibiliser les élèves à une thématique parti
 
 ### Cloner le projet
 ```bash
-git clone https://github.com/choucha-cyber/CyberChall.git
+git clone https://github.com/CadettesDeLaCyber/CyberChall.git
 cd CyberChall
 ```
 
@@ -26,7 +26,7 @@ cd CyberChall
 ```bash
 mvn spring-boot:run
 ```
-L'application sera accessible sur [http://localhost:8080](http://localhost:8080).
+L'application sera accessible sur [http://localhost:4040](http://localhost:4040).
 
 ## Structure du Projet
 ```
@@ -40,14 +40,14 @@ src/
 │
 └── main/resources/templates/  # HTML (Thymeleaf)
     ├── index.html
-    ├── accueil.html
+    ├── accueil-temporaire.html
 ```
 
 ## Exemples de Fonctionnalités
 - Affichage dynamique des modules (thématiques de sensibilisation à la cybersécurité)
-- Challenges interactifs avec les élèves
+- Quiz et challenges interactifs avec les élèves
 - Cours
-- Stockage des résultats (optionnel avec H2)
+- Statistiques
 
 ## Contribuer
 1. Forker le projet
@@ -61,7 +61,7 @@ src/
 - **Direction programme : Charlotte Wojcik et l'Amiral Coustillère**
 - **Cheffe de projet : Mathilde Douillard**
 - **Conception : Hanäe Lopez, Joseline Youego, Margaux Richard et Solène Lemonnier**
-- **Développement : MIMOUNI Aïcha**
+- **Développement : Aicha Mimouni**
 
 ## Licence
 Ce projet est sous licence Les Cadettes de la Cyber - Pôle d'excellence Cyber - Rennes.

@@ -8,25 +8,24 @@ import org.springframework.stereotype.Service;
 import com.cadettesdelacyber.CyberChall.models.Challenge;
 import com.cadettesdelacyber.CyberChall.repositories.ChallengeRepository;
 
-
 @Service
 public class ChallengeService {
 	@Autowired
-    private ChallengeRepository challengeRepository;
+	private ChallengeRepository challengeRepository;
 
-    public List<Challenge> getAllChallenges() {
-        return challengeRepository.findAll();
-    }
+	public List<Challenge> getAllChallenges() {
+		return challengeRepository.findAll();
+	}
 
-    public Challenge getChallenge(Long id) {
-        return challengeRepository.findById(id).orElse(null);
-    }
+	public Challenge getChallenge(Long id) {
+		return challengeRepository.findById(id).orElse(null);
+	}
 
-    public Challenge saveChallenge(Challenge challenge) {
-        return challengeRepository.save(challenge);
-    }
+	public Challenge saveChallenge(Challenge challenge) {
+		return challengeRepository.save(challenge);
+	}
 
-    public void deleteChallenge(Long id) {
-        challengeRepository.deleteById(id);
-    }
+	public void deleteChallenge(Long id) {
+		challengeRepository.deleteById(id);
+	}
 }

@@ -9,6 +9,7 @@ import java.util.Optional;
 
 @Repository
 public interface ModuleRepository extends JpaRepository<Module, Long> {
-    List<Module> findByNomContainingIgnoreCase(String nom);
-    Optional<Module> findByNom(String nom);
+	List<Module> findByNomContainingIgnoreCase(String nom);
+
+	Optional<Module> findByNom(String nom);
 }
