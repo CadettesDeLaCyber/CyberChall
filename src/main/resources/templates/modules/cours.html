@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+
+<div th:insert="~{fragments/header :: header}"></div>
+
+
+<body>
+
+	<!-- NAVIGATION depuis le fragment nav -->
+	<div th:insert="~{fragments/nav :: nav}"></div>
+
+	<section class="cours">
+		<div class="cours-content">
+
+			<div class="container mt-4">
+				<h1>📘 Cours</h1>
+				<div th:utext="${cours.contenu}"></div>
+				<!-- utext = HTML brut -->
+			</div>
+
+			<div class="buttons">
+				<a th:href="@{/}" class="btn">Retour aux modules</a> <a
+					th:href="@{/quiz}" class="btn">Commencer le Quizz</a> <a
+					th:href="@{/challenge}" class="btn"> Mini-challenge : </a>
+			</div>
+		</div>
+	</section>
+
+
+	<!-- FOOTER -->
+	<div th:insert="~{fragments/footer :: footer}"></div>
+
+
+</body>
+</html>

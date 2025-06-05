@@ -17,16 +17,16 @@ public class ModuleController {
     private ModuleService moduleService;
 
     // 1️⃣ Affichage global : modules + formulaire d'ajout
-    @GetMapping("")
+    @GetMapping("/create-module")
     public String afficherModules(Model model) {
         List<Module> modules = moduleService.getAllModules();
         model.addAttribute("modules", modules);
         model.addAttribute("nouveauModule", new Module());
-        return "modules/list-modules"; // Page unique
+        return "modules/create-module"; // Page unique
     }
 
     // 2️⃣ Création d’un nouveau module
-    @PostMapping("/create")
+    @PostMapping("/create-module")
     public String createModule(@ModelAttribute("nouveauModule") Module module) {
         moduleService.createModule(module);
         return "redirect:/modules";

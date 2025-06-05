@@ -35,6 +35,20 @@
 					<li><a
 						th:href="${estConnecte} ? @{/deconnexion} : (role == 'admin' ? @{/admin/connexion-admin} : @{/})"
 						th:text="${estConnecte} ? 'Déconnexion' : 'Connexion'"> </a></li>
+					<!-- Icône paramètres (roue crantée) -->
+					<li class="nav-item dropdown position-relative"><a href="#"
+						class="nav-link" onclick="toggleAccessibilityMenu()"
+						title="Accessibilité"> ⚙️ </a>
+						<ul class="dropdown-menu dropdown-menu-dark position-absolute"
+							id="accessibilityMenu" style="display: none;">
+							<li><a href="#" onclick="adjustFontSize(1)">🔎 Agrandir
+									le texte</a></li>
+							<li><a href="#" onclick="adjustFontSize(-1)">🔍 Réduire
+									le texte</a></li>
+							<li><a href="#" onclick="resetFontSize()">♻️
+									Réinitialiser</a></li>
+						</ul></li>
+
 				</ul>
 
 				<!-- RESPONSIVE ! -->

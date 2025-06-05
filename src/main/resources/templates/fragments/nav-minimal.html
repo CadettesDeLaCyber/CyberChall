@@ -1,0 +1,147 @@
+<!-- NAVIGATION MINIMALE -->
+<div th:fragment="nav">
+    <header class="nav-header">
+        <nav class="nav-container">
+            <!-- Logo -->
+            <div class="logo">
+                <img src="/images/logo.png" alt="Logo Cadettes de la Cyber" />
+            </div>
+
+            <!-- Titre -->
+            <h1 class="nav-title">CyberChall</h1>
+
+            <!-- Déconnexion + Burger -->
+            <div class="nav-actions">
+                <a th:href="@{/deconnexion}" class="nav-link">Déconnexion</a>
+                <div class="burger-icon" onclick="toggleFullMenu()">+</div>
+            </div>
+        </nav>
+
+        <!-- Menu déroulant -->
+        <ul id="fullMenu" class="full-menu">
+            <li><a th:href="@{/}">Accueil</a></li>
+            <li><a th:href="@{/admin/account}">Mon Compte</a></li>
+            <li><a th:href="@{/session/session}">Mes sessions</a></li>
+            <li><a th:href="@{/admin/create-account}">Créer compte</a></li>
+            <li><a th:href="@{/session/session-statistic}">Statistiques</a></li>
+            <li><a th:href="@{/contact}">Contact</a></li>
+        </ul>
+    </header>
+
+    <script>
+        function toggleFullMenu() {
+            const menu = document.getElementById("fullMenu");
+            menu.classList.toggle("open");
+        }
+    </script>
+
+    <style>
+        .nav-header {
+            background: linear-gradient(to right, #1d1d27, #0d0d0d);
+            color: white;
+            position: relative;
+            height: 80px; /* hauteur alignée */
+            display: flex;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .nav-container {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+
+        .logo img {
+            height: 40px;
+        }
+
+        .nav-title {
+            margin: 0;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: white;
+            font-weight: 500;
+        }
+
+        .burger-icon {
+            font-size: 32px;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .full-menu {
+            position: absolute;
+            top: 80px;
+            right: 20px;
+            background-color: #111;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease;
+            width: 220px;
+            border: 1px solid #333;
+            border-radius: 6px;
+        }
+
+        .full-menu.open {
+            max-height: 500px;
+        }
+
+        .full-menu li {
+            border-bottom: 1px solid #222;
+        }
+
+        .full-menu li a {
+            display: block;
+            padding: 12px 16px;
+            color: white;
+            text-decoration: none;
+            text-align: right;
+        }
+
+        .full-menu li a:hover {
+            background-color: #222;
+        }
+
+        @media (max-width: 768px) {
+            .nav-title {
+                font-size: 18px;
+            }
+
+            .nav-link {
+                font-size: 14px;
+            }
+
+            .burger-icon {
+                font-size: 28px;
+            }
+        }
+
+        /* CENTRAGE DU FOOTER */
+        footer {
+            text-align: center;
+            padding: 20px;
+            color: white;
+        }
+
+        footer .wrapper {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+    </style>
+</div>

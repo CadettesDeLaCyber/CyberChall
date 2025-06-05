@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Challenge Réseaux Sociaux : Désinfo ou vérité ?</title>
+  <style>
+    body { font-family: Arial; padding: 20px; background-color: #f4f4f9; }
+    h1 { color: #333; }
+    .post { border: 1px solid #ccc; padding: 15px; margin-bottom: 15px; border-radius: 10px; background-color: #fff; }
+    .post:hover { background-color: #f9f9f9; }
+    button { padding: 10px 20px; font-size: 1rem; }
+    #result { font-weight: bold; margin-top: 20px; }
+    .objectifs {
+        background-color: #e0f7fa;
+        padding: 15px;
+        border-radius: 8px;
+        margin-bottom: 20px;
+        border-left: 5px solid #00acc1;
+    }
+  </style>
+</head>
+<body>
+
+<h1>🌐 Challenge Réseaux Sociaux : Info ou Intox ?</h1>
+
+<div class="objectifs">
+  <h2>🎯 Objectifs pédagogiques :</h2>
+  <ul>
+    <li>Comprendre les mécanismes de <strong>propagande et désinformation</strong> sur les réseaux sociaux</li>
+    <li>Identifier les stratégies de <strong>manipulation émotionnelle</strong></li>
+    <li>Développer son <strong>esprit critique</strong> face aux contenus viraux</li>
+    <li>Prendre conscience de l’impact des <strong>biais algorithmiques</strong></li>
+  </ul>
+</div>
+
+<p>Lis les publications ci-dessous. L'une d'elles est une tentative de désinformation virale. Sauras-tu repérer laquelle ?</p>
+
+<form onsubmit="checkPost(event)">
+  <div class="post">
+    <input type="radio" name="post" value="1" id="p1">
+    <label for="p1"><strong>🗣️ Témoignage :</strong> "J’ai vu des drones pulvériser des produits chimiques sur la foule pendant la manifestation. Ils veulent nous contrôler par l’air !"</label>
+  </div>
+
+  <div class="post">
+    <input type="radio" name="post" value="2" id="p2">
+    <label for="p2"><strong>📊 Info vérifiée :</strong> "Le taux de participation à la dernière élection atteint un record de 68%, selon la Commission Nationale."</label>
+  </div>
+
+  <div class="post">
+    <input type="radio" name="post" value="3" id="p3">
+    <label for="p3"><strong>📰 Déclaration :</strong> "Le ministère annonce une nouvelle loi pour encadrer l’usage des IA dans les campagnes électorales."</label>
+  </div>
+
+  <button type="submit">Valider</button>
+</form>
+
+<p id="result"></p>
+
+<script>
+  function checkPost(e) {
+    e.preventDefault();
+    const selected = document.querySelector('input[name="post"]:checked');
+    const result = document.getElementById("result");
+
+    if (!selected) {
+      result.textContent = "❗ Sélectionne une publication avant de valider.";
+      result.style.color = "orange";
+      return;
+    }
+
+    if (selected.value === "1") {
+      result.innerHTML = "✅ Bien joué ! Cette publication utilise la peur et l'émotion pour manipuler. C’est une désinformation virale basée sur un faux témoignage.";
+      result.style.color = "green";
+    } else {
+      result.innerHTML = "❌ Ce n'était pas une tentative de manipulation. Réessaie !";
+      result.style.color = "red";
+    }
+  }
+</script>
+
+</body>
+</html>

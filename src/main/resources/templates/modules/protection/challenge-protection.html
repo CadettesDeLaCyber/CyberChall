@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Challenge RGPD</title>
+</head>
+<body>
+
+	<div class="challenge-rgpd">
+		<h1>🔍 Challenge RGPD : Trouve la violation</h1>
+		<p>
+			Une entreprise a laissé des informations confidentielles dans cette
+			page. Ta mission : <strong>trouver une adresse email</strong> visible
+			dans le code source.
+		</p>
+
+		<p>🧠 Objectifs pédagogiques Comprendre l’importance de ne pas
+			inclure de données personnelles dans le code HTML côté client
+
+			Appliquer le principe de confidentialité et de minimisation des
+			données (Art. 5 RGPD) Développer des réflexes d’analyse du code
+			source</p>
+
+		<form onsubmit="checkAnswer(event)">
+			<input type="text" id="email"
+				placeholder="Saisis l'adresse email trouvée" required>
+			<button type="submit">Valider</button>
+		</form>
+
+		<p id="result"></p>
+	</div>
+
+	<!-- Données personnelles mal protégées -->
+	<!-- Liste des clients VIP : alice.dupont@exemple.com, bob.martin@exemple.com -->
+
+	<script>
+		function checkAnswer(event) {
+			event.preventDefault();
+			const userInput = document.getElementById("email").value.trim()
+					.toLowerCase();
+			const result = document.getElementById("result");
+
+			const validEmails = [ "alice.dupont@exemple.com",
+					"bob.martin@exemple.com" ];
+
+			if (validEmails.includes(userInput)) {
+				result.textContent = "✅ Bravo ! Tu as repéré la fuite de données personnelles.";
+				result.style.color = "green";
+			} else {
+				result.textContent = "❌ Ce n'est pas la bonne réponse. Inspecte bien le code source de la page.";
+				result.style.color = "red";
+			}
+		}
+	</script>
+
+</body>
+</html>

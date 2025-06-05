@@ -402,3 +402,11 @@ button:hover {
 footer {
 	margin-top: 3rem;
 }
+
+/* Menu accessibilité : évite qu’il s’affiche tout à gauche */
+#accessibilityMenu {
+    right: 0;
+    left: auto;
+    min-width: 200px;
+    z-index: 1000;
+}

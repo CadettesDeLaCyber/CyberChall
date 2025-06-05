@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+
+<div th:insert="~{fragments/header :: header}"></div>
+
+<script th:inline="javascript">
+	const questions = /*[[${bonnesReponses}]]*/[];
+</script>
+
+<body>
+
+	<!-- NAVIGATION depuis le fragment nav -->
+	<div th:insert="~{fragments/nav :: nav}"></div>
+
+	<div id="quiz-container">
+		<h1 th:text="'Quiz : ' + ${sousModuleTitre}"></h1>
+
+
+		<div id="timer">
+			<i class="fas fa-hourglass-half"></i> Temps restant : <span id="time">02:00</span>
+		</div>
+
+		<form id="quiz-form">
+			<div th:utext="${quiz.questions}"></div>
+			
+			<button type="submit" id="submit-btn">Valider</button>
+			
+		</form>
+
+		<div id="result"></div>
+		<div id="score" style="display: none;"></div>
+	</div>
+
+</body>
+
+<!-- FOOTER -->
+<div th:insert="~{fragments/footer :: footer}"></div>
+
+</html>

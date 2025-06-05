@@ -1,81 +1,168 @@
 <!DOCTYPE html>
 <html lang="fr" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>Créer un module</title>
-    <link rel="stylesheet" th:href="@{/css/global.css}">
-    <style>
-        .sous-module {
-            border: 1px solid #ccc;
-            padding: 1em;
-            margin-bottom: 1em;
-            border-radius: 8px;
-        }
-    </style>
-</head>
-<body>
+
 <div th:insert="~{fragments/header :: header}"></div>
-<div th:insert="~{fragments/nav :: nav}"></div>
 
-<div class="container">
-    <h2>Créer un nouveau module</h2>
-    <form th:action="@{/modules/save}" method="post">
+<!-- CSS inline spécifique pour corriger affichage -->
+<style>
+body {
+	font-family: Arial, sans-serif;
+	background-color: #f4f4f4;
+	margin: 0;
+	padding: 30px;
+}
 
-        <!-- Nom du module -->
-        <label>Nom du module :</label>
-        <input type="text" name="nom" required><br>
+.container {
+	max-width: 1000px;
+	margin: auto;
+	background: #fff;
+	padding: 30px;
+	border-radius: 12px;
+	box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+	color: #000;
+}
 
-        <!-- Image du module -->
-        <label>Chemin de l’image :</label>
-        <input type="text" name="imagePath"><br>
+h1, h2 {
+	margin-top: 0;
+}
 
-        <!-- Sous-modules dynamiques -->
-        <h3>Sous-modules</h3>
-        <div id="sousModulesContainer">
-            <!-- Sous-modules ajoutés ici via JS -->
-        </div>
+label {
+	display: block;
+	font-weight: bold;
+	margin-top: 20px;
+	color: #000;
+}
 
-        <button type="button" onclick="ajouterSousModule()">➕ Ajouter un sous-module</button><br><br>
+input[type="text"], input[type="url"], textarea {
+	width: 100%;
+	padding: 10px;
+	margin-top: 6px;
+	border: 1px solid #ccc;
+	border-radius: 6px;
+	background-color: #fff;
+	color: #000;
+}
 
-        <button type="submit" class="btn">Créer le module</button>
-    </form>
+textarea {
+	font-family: monospace;
+	min-height: 180px;
+	white-space: pre-wrap;
+}
+
+button {
+	margin-top: 30px;
+	padding: 12px 24px;
+	font-size: 16px;
+	border: none;
+	background-color: #007BFF;
+	color: white;
+	border-radius: 6px;
+	cursor: pointer;
+}
+
+button:hover {
+	background-color: #0056b3;
+}
+
+hr {
+	margin-top: 30px;
+	margin-bottom: 30px;
+}
+</style>
+</head>
+
+<body>
+
+	<!-- NAVIGATION -->
+	<div th:replace="fragments/nav-minimal :: nav"></div>
+
+	<div class="container">
+		<h1>🛠️ Création d'un Module</h1>
+
+		<form method="post" th:action="@{/modules/save-module}"
+			enctype="multipart/form-data">
+
+			<!-- MODULE -->
+			<label for="titre">INTRODUIRE LE TITRE DU MODULE ICI :</label> <input
+				type="text" id="titre" name="titre" value="<h1>Titre du module</h1>"
+				placeholder="Utilisez des balises HTML comme &lt;h1&gt;Titre&lt;/h1&gt;"
+				required> <label for="image">Image du module (URL ou
+				chemin à introduire à la place de 'nom_image.png') :</label>
+			<p>(assurez-vous que l'image soit bien présente dans le dossier
+				"images" du template)</p>
+			<input type="text" id="image" name="imageUrl"
+				value="/images/nom_image.png"
+				placeholder="Ajouter le chemin en vous assurant que l'image est bien dans le dossier 'images' de l'application">
+
+
+			<hr>
+
+			<!-- SOUS-MODULE -->
+			<h2>📂 Sous-module</h2>
+
+			<label for="sousTitre">INTRODUIRE LE TITRE DU SOUS-MODULE ICI
+				:</label> <input type="text" id="sousTitre" name="sousModules[0].titre"
+				required> <label for="sousImage">Image du
+				sous-module :</label> <input type="text" id="sousImage"
+				name="sousModules[0].imageUrl" required> 
+
+			<!-- COURS -->
+			<label for="cours">Contenu du cours à introduire ici
+				(respecter le format HTML ci-dessous) :</label>
+			<textarea id="cours" name="sousModules[0].contenuCours">
+			<h1>📘 INTRODUIRE TITRE DU COURS ICI :</h1>
+<p>Texte d’introduction ici…</p>
+
+<h2>📌 Sous-titre</h2>
+<ul>
+  <li>Premier élément</li>
+  <li>Deuxième élément</li>
+</ul>
+
+<p>Texte de conclusion ici…</p>
+				
+            </textarea>
+
+			<!-- QUIZ -->
+			<label for="questions">Questions du quiz à introduire ici
+				(respecter le format HTML strict) :</label>
+			<textarea id="questions" name="sousModules[0].contenuQuiz"
+				oninput="updatePreview('questions')">
+				<div class="question-block">
+  <p>
+						<strong>1. QUESTION 1 A INTRODUIRE ICI </strong>
+					</p>
+  <label><input type="radio" name="q1" value="a"> a) Proposition de réponse 1 ici</label><br>
+  <label><input type="radio" name="q1" value="b"> b) Proposition de réponse 2 ici</label><br>
+  <label><input type="radio" name="q1" value="c"> c) Proposition de réponse 3 ici</label><br>
+  <label><input type="radio" name="q1" value="d"> d) Proposition de réponse 4 ici</label><br>
 </div>
+				
+			</textarea>
 
-<div th:insert="~{fragments/footer :: footer}"></div>
+			<div class="preview" id="preview-questions"></div>
 
-<script>
-    let index = 0;
+			<label for="reponses">Réponses correctes à introduire ici
+				(séparées par des virgules, format : a,c,b,...) :</label> <input type="text"
+				id="reponses" name="sousModules[0].reponsesQuiz"
+				placeholder="Exemple : a,c,b,b,c,b,c,b,b,c">
 
-    function ajouterSousModule() {
-        const container = document.getElementById('sousModulesContainer');
-        const html = `
-        <div class="sous-module">
-            <label>Nom du sous-module :</label>
-            <input type="text" name="sousModules[${index}].nom" required><br>
+			<button type="submit">✅ Enregistrer le module</button>
+		</form>
+	</div>
 
-            <label>Chemin de l’image :</label>
-            <input type="text" name="sousModules[${index}].imagePath"><br>
+	<!-- FOOTER -->
+	<div th:insert="~{fragments/footer :: footer}"></div>
+	<script>
+		function updatePreview(type) {
+			const input = document.getElementById(type).value;
+			document.getElementById(`preview-${type}`).innerHTML = input;
+		}
 
-            <label>Cours :</label>
-            <select name="sousModules[${index}].coursId">
-                <option th:each="cours : ${coursList}" 
-                        th:value="${cours.id}" 
-                        th:text="${cours.nom}">
-                </option>
-            </select><br>
-
-            <label>Quiz :</label>
-            <select name="sousModules[${index}].quizId">
-                <option th:each="quiz : ${quizList}" 
-                        th:value="${quiz.id}" 
-                        th:text="${quiz.nom}">
-                </option>
-            </select><br>
-        </div>`;
-        container.insertAdjacentHTML('beforeend', html);
-        index++;
-    }
-</script>
+		// Affichage initial
+		updatePreview('cours');
+		updatePreview('questions');
+	</script>
 
 </body>
 </html>

@@ -81,6 +81,32 @@
         burger.addEventListener('click', () => {
             navLinks.classList.toggle('active');
         });
+        
+        let baseFontSize = 16;
+
+        function toggleAccessibilityMenu() {
+            const menu = document.getElementById("accessibilityMenu");
+            menu.style.display = menu.style.display === "block" ? "none" : "block";
+        }
+
+        function adjustFontSize(delta) {
+            baseFontSize += delta;
+            document.body.style.fontSize = baseFontSize + "px";
+        }
+
+        function resetFontSize() {
+            baseFontSize = 16;
+            document.body.style.fontSize = "16px";
+        }
+
+        // Fermer le menu si on clique ailleurs
+        document.addEventListener("click", function (event) {
+            const menu = document.getElementById("accessibilityMenu");
+            const isClickInside = menu.parentElement.contains(event.target);
+            if (!isClickInside) {
+                menu.style.display = "none";
+            }
+        });
 
     </script>
 	<script src="/js/quiz-cyberattaques.js"></script>

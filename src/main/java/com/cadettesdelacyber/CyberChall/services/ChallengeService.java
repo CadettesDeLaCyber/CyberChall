@@ -12,6 +12,10 @@ import com.cadettesdelacyber.CyberChall.repositories.ChallengeRepository;
 public class ChallengeService {
 	@Autowired
 	private ChallengeRepository challengeRepository;
+	
+	public Challenge findBySousModuleId(Long id) {
+        return challengeRepository.findBySousModuleId(id);
+    }
 
 	public List<Challenge> getAllChallenges() {
 		return challengeRepository.findAll();

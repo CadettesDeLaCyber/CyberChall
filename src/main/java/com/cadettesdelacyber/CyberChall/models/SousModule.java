@@ -38,7 +38,7 @@ public class SousModule {
 	// Foreign Key to Quizz
 	@OneToOne
 	@JoinColumn(name = "quizz_id")
-	private Quizz quizz;
+	private Quiz quizz;
 
 	// Foreign Key to Challenge
 	@OneToOne
@@ -49,7 +49,7 @@ public class SousModule {
 
 	}
 
-	public SousModule(Long id, String titre, String imageUrl, Module module, String link, Cours cours, Quizz quizz,
+	public SousModule(Long id, String titre, String imageUrl, Module module, String link, Cours cours, Quiz quizz,
 			Challenge challenge) {
 		super();
 		this.id = id;
@@ -110,11 +110,11 @@ public class SousModule {
 		this.cours = cours;
 	}
 
-	public Quizz getQuizz() {
+	public Quiz getQuizz() {
 		return quizz;
 	}
 
-	public void setQuizz(Quizz quizz) {
+	public void setQuizz(Quiz quizz) {
 		this.quizz = quizz;
 	}
 

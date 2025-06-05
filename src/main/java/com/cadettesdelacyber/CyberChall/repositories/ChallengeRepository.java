@@ -7,4 +7,5 @@ import com.cadettesdelacyber.CyberChall.models.Challenge;
 
 @Repository
 public interface ChallengeRepository extends JpaRepository<Challenge, Long> {
+	Challenge findBySousModuleId(Long sousModuleId);
 }

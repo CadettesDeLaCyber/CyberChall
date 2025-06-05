@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="fr" xmlns:th="http://www.thymeleaf.org">
 
-<div th:insert="~{fragments/header :: header}"></div>
+<!-- <div th:insert="~{fragments/header :: header}"></div> -->
 
 <style>
 .module-container {
@@ -66,38 +66,43 @@
 }
 
 .buttons a {
-    display: inline-block;
-    text-align: center;
-    text-decoration: none;
-    padding: 15px;
-    font-size: 16px;
-    border: none;
-    border-radius: 10px;
-    background: linear-gradient(to right, #11111d, #292938);
-    color: white;
-    font-weight: bold;
-    cursor: pointer;
-    transition: background 0.3s;
+	display: inline-block;
+	text-align: center;
+	text-decoration: none;
+	padding: 15px;
+	font-size: 16px;
+	border: none;
+	border-radius: 10px;
+	background: linear-gradient(to right, #11111d, #292938);
+	color: white;
+	font-weight: bold;
+	cursor: pointer;
+	transition: background 0.3s;
 }
 
 .buttons a:hover {
-    background: #44445a;
+	background: #44445a;
 }
-
 
 .back-button {
 	font-size: 24px;
 	margin: 20px 40px;
 	cursor: pointer;
-	color: white;
 	text-align: left;
+}
+
+.back-button a {
+	color: white;
+	text-decoration : none;
 }
 </style>
 
 <body style="background-color: #0f0f1a; font-family: sans-serif;">
 
 	<!-- NAVIGATION -->
-	<div th:insert="~{fragments/nav :: nav}"></div>
+	<!--<div th:insert="~{fragments/nav :: nav}"></div>  -->
+	<div th:replace="fragments/nav-minimal :: nav"></div>
+	
 
 	<!-- Message de déconnexion -->
 	<div th:if="${message}" class="alert alert-success">
@@ -105,7 +110,7 @@
 	</div>
 
 	<!-- Flèche de retour -->
-	<div class="back-button">←</div>
+	<div class="back-button"><a th:href="@{/}">←</a></div>
 
 	<!-- Contenu principal -->
 	<main class="module-container">
@@ -122,16 +127,17 @@
 			<!-- 
 			Liens des boutons a généréer dynamiquement selon l'id du module
 			<div class="buttons">
-				<button>Cours</button>
-				<button>Challenge</button>
-				<button>Quizz</button>
+				<a href="${sousModule.cours}">Cours</a> 
+				<a href="${sousModule.quiz}">Cours</a> 
+				<a href="${sousModule.challenge}">Challenge</a> 
 			</div>
 			 -->
 			<div class="buttons">
-				<a href="/modules/cyberattaque/base-cyberattaque">Cours</a> <a
-					href="/modules/cyberattaque/challenge-motdepasse">Challenge</a>
-				<a href="/modules/cyberattaque/quiz-cyberattaque">Quizz</a>
+				<a th:href="@{'/modules/cours/' + ${coursId}}">Cours</a> 
+				<a th:href="@{'/modules/quiz/' + ${quizId}}">Quiz</a> 
+				<a th:href="@{'/modules/challenge/' + ${challengeId}}">Challenge</a>
 			</div>
+
 
 		</div>
 

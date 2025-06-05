@@ -1,6 +1,9 @@
 package com.cadettesdelacyber.CyberChall.controllers;
 
 
+import java.util.Arrays;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -8,7 +11,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.cadettesdelacyber.CyberChall.models.Challenge;
+import com.cadettesdelacyber.CyberChall.models.Cours;
+import com.cadettesdelacyber.CyberChall.models.Quiz;
 import com.cadettesdelacyber.CyberChall.models.SousModule;
+import com.cadettesdelacyber.CyberChall.services.ChallengeService;
+import com.cadettesdelacyber.CyberChall.services.CoursService;
+import com.cadettesdelacyber.CyberChall.services.QuizService;
 import com.cadettesdelacyber.CyberChall.services.SousModuleService;
 
 @Controller
@@ -18,18 +27,36 @@ public class SousModulesController {
 	@Autowired
 	private SousModuleService sousModuleService;
 	
+	@Autowired
+	private CoursService coursService;
+	
+	@Autowired
+	private QuizService quizService;
+	
+	@Autowired
+	private ChallengeService challengeService;
+
+	
 	// page d'accueil des sous-modules: modules/accueil-modules : modules/accueil-modules
 	@GetMapping("/accueil-modules/{id}")
 	public String afficherModuleDepuisSousModule(@PathVariable Long id, Model model) {
 	    SousModule sousModule = sousModuleService.findById(id);
-
 	    if (sousModule == null) {
-	        return "redirect:/modules"; // Ou afficher une page d'erreur
+	        return "redirect:/modules";
 	    }
 
-	    model.addAttribute("sousModule", sousModule); // ✅ PAS juste sousModule.getImageUrl()
+	    Cours cours = coursService.findBySousModuleId(id);
+	    Quiz quiz = quizService.findBySousModuleId(id);
+	    Challenge challenge = challengeService.findBySousModuleId(id);
+
+	    model.addAttribute("sousModule", sousModule);
+	    model.addAttribute("coursId", cours != null ? cours.getId() : null);
+	    model.addAttribute("quizId", quiz != null ? quiz.getId() : null);
+	    model.addAttribute("challengeId", challenge != null ? challenge.getId() : null);
+
 	    return "modules/accueil-modules";
 	}
+
 	
 	// ============================================================
     // Section 1: Sous-modules Cyberattaques : Affichages ==> GET
@@ -122,4 +149,38 @@ public class SousModulesController {
     public String showWifiPublicVpnPage() {
         return "modules/securite/wifi-puplic-vpn";  
     }
+    
+    //Accès au cours
+    @GetMapping("/cours/{id}")
+    public String afficherCours(@PathVariable Long id, Model model) {
+        Cours cours = coursService.findById(id);
+
+        if (cours == null) {
+            return "erreur/404"; // ou une autre page d’erreur
+        }
+
+        model.addAttribute("cours", cours);
+        return "modules/cours"; // chemin vers le template cours.html
+    }
+    
+    //Accès au quiz
+    @GetMapping("/quiz/{id}")
+    public String afficherQuiz(@PathVariable Long id, Model model) {
+        Quiz quiz = quizService.findById(id);
+
+        if (quiz == null) {
+            return "erreur/404"; // ou une autre page d’erreur
+        }
+
+        model.addAttribute("quiz", quiz);
+       
+        // Convertir la chaîne reponses "a,c,b,b,c,b,c,b,b,c" en liste
+        List<String> bonnesReponses = Arrays.asList(quiz.getReponses().split(","));
+        model.addAttribute("bonnesReponses", bonnesReponses);
+
+        return "modules/quiz"; // chemin vers le template quiz.html
+    }
+
+
+
 }

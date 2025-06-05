@@ -9,26 +9,30 @@ import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "quizz")
-public class Quizz {
+@Table(name = "quiz")
+public class Quiz {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	
 	private String questions;
+	
+	private String reponses;
 
 	@OneToOne
 	@JoinColumn(name = "sousmodule_id", unique = true)
 	private SousModule sousModule;
 
-	public Quizz() {
+	public Quiz() {
 
 	}
 
-	public Quizz(Long id, String questions, SousModule sousModule) {
+	public Quiz(Long id, String questions, String reponses, SousModule sousModule) {
 		super();
 		this.id = id;
 		this.questions = questions;
+		this.reponses = reponses;
 		this.sousModule = sousModule;
 	}
 
@@ -46,6 +50,15 @@ public class Quizz {
 
 	public void setQuestions(String questions) {
 		this.questions = questions;
+	}
+	
+
+	public String getReponses() {
+		return reponses;
+	}
+
+	public void setReponses(String reponses) {
+		this.reponses = reponses;
 	}
 
 	public SousModule getSousModule() {
