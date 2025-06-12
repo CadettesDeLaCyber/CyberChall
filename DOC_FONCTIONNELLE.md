@@ -61,7 +61,7 @@ Chaque module comprend :
 - Participation à une session existante  
 - Durée de vie d'une session : 1 mois  
 
-#### 🔧 Diagramme UML - Architecture des Entités
+### 🔧 Diagramme UML - Architecture des Entités
 
 ```mermaid
 classDiagram
@@ -129,6 +129,7 @@ classDiagram
     SousModule --> Quizz : contient  
     SousModule --> Challenge : contient  
     SousModule --> Cours : lié à  
+
 
 ### ✅ Service backend pour charger uniquement les modules concernés
 
