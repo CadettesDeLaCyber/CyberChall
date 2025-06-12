@@ -70,7 +70,7 @@ classDiagram
         - String username
         - String password
         + void createSession()
-        + List~Session~ viewSessions()
+        + List Session viewSessions()
         + void deleteSession()
     }
 
@@ -81,13 +81,13 @@ classDiagram
         - Int durationInDays
         - Long admin_id
         + void addSubModules()
-        + List~SousModule~ getSousModules()
+        + List SousModule getSousModules()
     }
 
     class Module {
         - Long id
         - String name
-        + List~SousModule~ getSousModules()
+        + List SousModule getSousModules()
     }
 
     class SousModule {
@@ -129,16 +129,7 @@ classDiagram
     SousModule --> Quizz : contient  
     SousModule --> Challenge : contient  
     SousModule --> Cours : lié à  
-```markdown
----
 
-### ✅ Service backend pour charger uniquement les modules concernés
-
-### ✅ Vue `accueil-temporaire.html` basée sur `accueil-admin.html`, mais :
-- sans bloc d’authentification  
-- sans menu d’administration  
-
----
 
 ### 3.3 📊 Résultats et Suivi de Progression
 
