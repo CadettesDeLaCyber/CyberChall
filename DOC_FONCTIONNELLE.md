@@ -129,7 +129,9 @@ classDiagram
     SousModule --> Quizz : contient  
     SousModule --> Challenge : contient  
     SousModule --> Cours : lié à  
+```
 
+---
 
 ### 3.3 📊 Résultats et Suivi de Progression
 
