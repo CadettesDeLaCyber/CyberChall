@@ -56,7 +56,7 @@ Chaque module comprend :
 
 ### 3.2 🧭 Gestion des Sessions
 
-- Création de sessions (date, thématiques sélectionnées, QrCode)  
+- Création de sessions (date, thématiques sélectionnées, QR Code)  
 - Liste des sessions disponibles dans un dashboard  
 - Participation à une session existante  
 - Durée de vie d'une session : 1 mois  
@@ -123,60 +123,103 @@ classDiagram
         - Long sousmodule_id
     }
 
-    Admin "1" --> "many" Session : crée
-    Session "1" --> "2..4" SousModule : contient
-    SousModule --> Module : appartient à
-    SousModule --> Quizz : contient
-    SousModule --> Challenge : contient
-    SousModule --> Cours : lié à
+    Admin "1" --> "many" Session : crée  
+    Session "1" --> "2..4" SousModule : contient  
+    SousModule --> Module : appartient à  
+    SousModule --> Quizz : contient  
+    SousModule --> Challenge : contient  
+    SousModule --> Cours : lié à  
 
-    ---
+### ✅ Service backend pour charger uniquement les modules concernés
+
+### ✅ Vue `accueil-temporaire.html` basée sur `accueil-admin.html`, mais :
+- sans bloc d’authentification  
+- sans menu d’administration  
+
+---
+
+### 3.3 📊 Résultats et Suivi de Progression
+
+- Score global par session  
+- Détail des résultats par module  
+- Historique des participations  
+- Statistiques exportables (CSV à terme)  
+
+---
+
+### 3.4 👥 Gestion des Utilisateurs
+
+- Liste des élèves connectés  
+- Association élèves ↔ sessions  
+- Accès restreint à certains modules selon session  
+
+---
+
+### 3.5 🔐 Authentification et Sécurité
+
+- Session via cookies  
+- Authentification simple (pas encore d’inscription)  
+- Séparation claire des rôles (élève / admin)  
+
+---
+
+### 3.6 🎨 Interface Utilisateur (UI)
+
+- Responsive design (desktop/tablette/mobile)  
+- Interface épurée, inspirée de l’univers éducatif  
+- Couleurs en cours de révision pour harmonisation avec le site officiel du PEC  
+
+> 📝 **PS** : Suite à un échange avec Dylan, il sera probablement nécessaire de revoir la charte couleur de l’application pour l’aligner avec le site du PEC (en cours de lancement).  
+> Cependant, il est préférable que ce soit **toi (Mathilde)** ou **Dylan** qui l’annonce à l’équipe, car cette idée avait auparavant soulevé quelques oppositions (notamment liées à l’aspect jugé “trop girly”).
+
+---
 
 ## 4. 👣 Parcours Utilisateur
 
-### Élève :
-1. Arrive sur `/` → page de connexion.
-2. Se connecte → redirection vers `accueil_admin`.
-3. Accède aux modules, répond aux quiz/challenges.
-4. Visualise ses résultats.
+### 👩‍🎓 Élève
 
-### Administrateur :
-1. Connexion comme un utilisateur classique.
-2. Accès à des vues supplémentaires :
-   - Création de session
-   - Liste des sessions actives
-   - Vue sur les performances des utilisateurs
+1. Scanne un QR code / clique sur un lien  
+2. Atterrit sur une page temporaire  
+3. Accède aux modules (cours + quiz + challenge)  
+4. Visualise un résumé de sa performance à la fin  
+
+### 👨‍🏫 Administrateur
+
+1. Se connecte via `/login`  
+2. Accède à l’interface admin :  
+   - Créer une session temporaire  
+   - Gérer les modules  
+   - Voir les statistiques  
 
 ---
 
 ## 5. 🛠 Technologies Utilisées
 
-| Composant        | Technologie        |
-|------------------|--------------------|
-| Backend          | Spring Boot (Java) |
+| Composant        | Technologie         |
+|------------------|---------------------|
+| Backend          | Spring Boot (Java)  |
 | Frontend         | Thymeleaf, HTML/CSS |
 | Authentification | Cookie + Session    |
-| Build            | Maven              |
-| Base de données  | (À implémenter, version actuelle utilise une mémoire temporaire) |
+| Build            | Maven               |
+| Base de données  | En mémoire (temporaire) |
 
 ---
 
 ## 6. 🚀 Évolutions Possibles
 
-- Système d’inscription avec hachage des mots de passe
-- Export des résultats (CSV, PDF)
-- Interface d’administration dédiée
-- Niveaux de difficulté par module
-- Gamification (badges, niveaux, timer)
+- Création de comptes élèves  
+- Sécurisation avancée (Spring Security)  
+- Dashboard statistiques dynamiques  
+- Ajout de badges, niveaux, timers (gamification)  
+- Export PDF ou CSV des performances  
 
 ---
 
 ## 7. 🧩 Conclusion
 
-**CyberChall** est un outil éducatif moderne, conçu pour éveiller les jeunes aux enjeux de la cybersécurité.  
-Avec son interface simple et ses contenus ludiques, elle favorise une prise de conscience numérique tout en rendant l'apprentissage attractif.
+**CyberChall** est un outil moderne et pédagogique, conçu pour sensibiliser les jeunes aux enjeux de cybersécurité.  
+Son interface intuitive et son contenu progressif en font un levier d'apprentissage ludique et efficace.
 
 ---
 
-> 🛠 *Projet open-source maintenu dans un but pédagogique. Pour toute suggestion, merci de proposer une issue ou un pull request.*
-
+> 🛠 *Projet open-source à vocation éducative. Contributions bienvenues via issues ou pull requests sur le dépôt GitHub.*
