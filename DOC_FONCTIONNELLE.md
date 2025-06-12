@@ -129,7 +129,8 @@ classDiagram
     SousModule --> Quizz : contient  
     SousModule --> Challenge : contient  
     SousModule --> Cours : lié à  
-
+```markdown
+---
 
 ### ✅ Service backend pour charger uniquement les modules concernés
 
