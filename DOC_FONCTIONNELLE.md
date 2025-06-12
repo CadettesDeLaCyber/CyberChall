@@ -22,9 +22,9 @@
 ## 1. 🎯 Introduction
 
 **CyberChall** est une application web pédagogique développée pour initier les collégiens et lycéens aux bonnes pratiques en cybersécurité.  
-Elle combine des contenus théoriques, des quiz et des challenges interactifs.
+Elle combine des contenus théoriques, des quiz (V1) et des challenges interactifs (V2).
 
-Développée avec **Spring Boot** et **Thymeleaf**, elle permet de suivre la progression des utilisateurs et de gérer les sessions pédagogiques.
+Développée avec **Spring Boot** elle permet de suivre la progression des utilisateurs et de gérer les sessions pédagogiques.
 
 ---
 
@@ -32,8 +32,7 @@ Développée avec **Spring Boot** et **Thymeleaf**, elle permet de suivre la pro
 
 - Sensibiliser les élèves aux enjeux de la cybersécurité.  
 - Évaluer leurs connaissances via des modules interactifs.  
-- Suivre leur progression grâce à des outils de reporting simples.  
-- Fournir aux enseignants une interface de gestion intuitive.  
+-   
 
 ---
 
@@ -56,7 +55,7 @@ Chaque module comprend :
 
 ### 3.2 🧭 Gestion des Sessions
 
-- Création de sessions (date, thématiques sélectionnées, QR Code)  
+- Création de sessions (date, thématiques sélectionnées, lien et QR Code)  
 - Liste des sessions disponibles dans un dashboard  
 - Participation à une session existante  
 - Durée de vie d'une session : 1 mois  
@@ -133,7 +132,7 @@ classDiagram
 
 ---
 
-### 3.3 📊 Résultats et Suivi de Progression
+### 3.3 📊 Résultats et Suivi de Progression (V2)
 
 - Score global par session  
 - Détail des résultats par module  
@@ -144,6 +143,7 @@ classDiagram
 
 ### 3.4 👥 Gestion des Utilisateurs
 
+- Admin (cadettes) 
 - Liste des élèves connectés  
 - Association élèves ↔ sessions  
 - Accès restreint à certains modules selon session  
@@ -152,20 +152,17 @@ classDiagram
 
 ### 3.5 🔐 Authentification et Sécurité
 
-- Session via cookies  
-- Authentification simple (pas encore d’inscription)  
-- Séparation claire des rôles (élève / admin)  
+- Session via QrCode 
+- Authentification sans créaion de compte pour les élèves 
+- Authentification sécuriée pour les Admin (hashage mdp) 
 
 ---
 
 ### 3.6 🎨 Interface Utilisateur (UI)
 
 - Responsive design (desktop/tablette/mobile)  
-- Interface épurée, inspirée de l’univers éducatif  
+- Interface épurée 
 - Couleurs en cours de révision pour harmonisation avec le site officiel du PEC  
-
-> 📝 **PS** : Suite à un échange avec Dylan, il sera probablement nécessaire de revoir la charte couleur de l’application pour l’aligner avec le site du PEC (en cours de lancement).  
-> Cependant, il est préférable que ce soit **toi (Mathilde)** ou **Dylan** qui l’annonce à l’équipe, car cette idée avait auparavant soulevé quelques oppositions (notamment liées à l’aspect jugé “trop girly”).
 
 ---
 
@@ -176,15 +173,15 @@ classDiagram
 1. Scanne un QR code / clique sur un lien  
 2. Atterrit sur une page temporaire  
 3. Accède aux modules (cours + quiz + challenge)  
-4. Visualise un résumé de sa performance à la fin  
+4. Visualise un résumé de sa performance à la fin (V2)
 
 ### 👨‍🏫 Administrateur
 
-1. Se connecte via `/login`  
+1. Se connecte via `/login`  (ou création de compte)
 2. Accède à l’interface admin :  
    - Créer une session temporaire  
    - Gérer les modules  
-   - Voir les statistiques  
+   - Voir les statistiques (V2)
 
 ---
 
@@ -193,10 +190,10 @@ classDiagram
 | Composant        | Technologie         |
 |------------------|---------------------|
 | Backend          | Spring Boot (Java)  |
-| Frontend         | Thymeleaf, HTML/CSS |
-| Authentification | Cookie + Session    |
+| Frontend         | Thymeleaf, HTML/CSS/JavaScript |
+| Authentification | identifiants (admin) ou Session (élèves) |
 | Build            | Maven               |
-| Base de données  | En mémoire (temporaire) |
+| Base de données  | MySql |
 
 ---
 
@@ -212,7 +209,7 @@ classDiagram
 
 ## 7. 🧩 Conclusion
 
-**CyberChall** est un outil moderne et pédagogique, conçu pour sensibiliser les jeunes aux enjeux de cybersécurité.  
+**CyberChall** est un outil pédagogique, conçu pour sensibiliser les jeunes aux enjeux de cybersécurité.  
 Son interface intuitive et son contenu progressif en font un levier d'apprentissage ludique et efficace.
 
 ---
