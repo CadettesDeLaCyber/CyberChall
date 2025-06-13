@@ -1,0 +1,91 @@
+
+.module-container {
+	display: flex;
+	justify-content: space-between;
+	align-items: flex-start;
+	gap: 40px;
+	padding: 40px;
+}
+
+.left-section {
+	flex: 1;
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+}
+
+.left-section h2 {
+	font-size: 28px;
+	font-weight: bold;
+	margin-bottom: 20px;
+}
+
+.left-section img {
+	width: 80%;
+	border-radius: 15px;
+}
+
+.right-section {
+	flex: 1.5;
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+}
+
+.right-section p {
+	margin-bottom: 30px;
+	line-height: 1.6;
+}
+
+.buttons {
+	display: flex;
+	flex-direction: column;
+	gap: 15px;
+}
+
+.buttons button {
+	padding: 15px;
+	font-size: 16px;
+	border: none;
+	border-radius: 10px;
+	background: linear-gradient(to right, #11111d, #292938);
+	color: white;
+	font-weight: bold;
+	cursor: pointer;
+	transition: background 0.3s;
+}
+
+.buttons button:hover {
+	background: #44445a;
+}
+
+.buttons a {
+	display: inline-block;
+	text-align: center;
+	text-decoration: none;
+	padding: 15px;
+	font-size: 16px;
+	border: none;
+	border-radius: 10px;
+	background: linear-gradient(to right, #11111d, #292938);
+	color: white;
+	font-weight: bold;
+	cursor: pointer;
+	transition: background 0.3s;
+}
+
+.buttons a:hover {
+	background: #44445a;
+}
+
+.back-button {
+	font-size: 24px;
+	margin: 20px 40px;
+	cursor: pointer;
+	text-align: left;
+}
+
+.back-button a {
+	color: white;
+	text-decoration : none;
+}

@@ -1,33 +1,46 @@
 <!-- fragments/footer.html -->
 <div th:fragment="footer">
-    <footer>
-        <img src="/images/logo_cadettes.png" alt="Les Cadettes de la Cyber" style="height: 40px;">
-        <p>&copy; 2025 - CyberChall. Cadettes de la Cyber - Tous droits réservés.</p>
-    </footer>
+	<footer>
+		<img src="/images/logo.png" alt="Les Cadettes de la Cyber"
+			style="height: 40px;"> <br>
+		<small>&copy; 2025 - CyberChall. Cadettes de la Cyber - Tous droits
+			réservés.</small>
+			
+		<div class="social-icons">
+			<a href="https://fr.linkedin.com/showcase/les-cadettes-de-la-cyber/" target="_blank"
+				aria-label="LinkedIn"> Linkedin
+			</a> 
+			<a href="https://www.instagram.com/cadettesdelacyber/" target="_blank"
+				aria-label="Instagramm"> Instagramm
+			</a> 
+			<a href="https://www.youtube.com/@poledexcellencecyber" target="_blank"
+				aria-label="Youtube"> Youtube
+			</a> 
+			<a href="https://www.les-cadettes-de-la-cyber.org/" target="_blank"
+				aria-label="site web cadettes de la cyber"> Cadettes de la Cyber
+			</a>
+			<a href="https://www.pole-excellence-cyber.org/" target="_blank"
+				aria-label="site web pole-excellence-cyber"> Pôle d'Excellence Cyber
+			</a>
+		</div>
+	</footer>
 
-    <script>
-        function toggleMode() {
-            const body = document.body;
-            body.classList.toggle("light-mode");
+	<script>
+    function toggleMode() {
+        const body = document.body;
+        const isDark = body.classList.toggle("dark-mode");
 
-            if (body.classList.contains("light-mode")) {
-                localStorage.setItem("theme", "light");
-            } else {
-                localStorage.setItem("theme", "dark");
-            }
+        localStorage.setItem("theme", isDark ? "dark" : "light");
+    }
+    window.onload = () => {
+        // Ne rien faire au niveau du thème, on part toujours en clair
+        document.body.classList.remove("dark-mode");
+
+        const themeStatus = document.getElementById('theme-status');
+        if (themeStatus) {
+            themeStatus.textContent = "Clair";
         }
-
-        window.onload = () => {
-            const savedTheme = localStorage.getItem("theme");
-            if (savedTheme === "light") {
-                document.body.classList.add("light-mode");
-            }
-
-            const themeStatus = document.getElementById('theme-status');
-            if (themeStatus && savedTheme === 'light') {
-                themeStatus.textContent = "Clair";
-            }
-        };
+    };
 
         function logout() {
             alert("Déconnexion réussie.");
@@ -112,4 +125,5 @@
 	<script src="/js/quiz-cyberattaques.js"></script>
 	<script src="/js/quiz-reseau.js"></script>
 	<script src="/js/quiz-securite.js"></script>
+	<script src="/js/accueil-admin.js"></script>
 </div>

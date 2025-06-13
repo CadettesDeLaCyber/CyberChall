@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="fr" xmlns:th="http://www.thymeleaf.org">
 
-<!-- <div th:insert="~{fragments/header :: header}"></div> -->
+<div th:insert="~{fragments/header :: header}"></div>
 
 <style>
 .module-container {
@@ -10,7 +10,6 @@
 	align-items: flex-start;
 	gap: 40px;
 	padding: 40px;
-	color: white;
 }
 
 .left-section {
@@ -47,26 +46,17 @@
 	display: flex;
 	flex-direction: column;
 	gap: 15px;
+	width: 100%;
 }
 
-.buttons button {
-	padding: 15px;
-	font-size: 16px;
-	border: none;
-	border-radius: 10px;
-	background: linear-gradient(to right, #11111d, #292938);
-	color: white;
-	font-weight: bold;
-	cursor: pointer;
-	transition: background 0.3s;
+.top-buttons {
+	display: flex;
+	gap: 15px;
+	width: 100%;
 }
 
-.buttons button:hover {
-	background: #44445a;
-}
-
-.buttons a {
-	display: inline-block;
+.top-buttons a {
+	flex: 1;
 	text-align: center;
 	text-decoration: none;
 	padding: 15px;
@@ -80,29 +70,38 @@
 	transition: background 0.3s;
 }
 
-.buttons a:hover {
-	background: #44445a;
-}
-
-.back-button {
-	font-size: 24px;
-	margin: 20px 40px;
-	cursor: pointer;
-	text-align: left;
-}
-
-.back-button a {
+.bottom-button {
+	text-align: center;
+	text-decoration: none;
+	padding: 15px;
+	font-size: 16px;
+	border: none;
+	border-radius: 10px;
+	background: linear-gradient(to right, #11111d, #292938);
 	color: white;
-	text-decoration : none;
+	font-weight: bold;
+	cursor: pointer;
+	transition: background 0.3s;
+
+	/* clef ici */
+	width: 100%;
+	display: block;
 }
 </style>
 
-<body style="background-color: #0f0f1a; font-family: sans-serif;">
+<body class="container">
 
 	<!-- NAVIGATION -->
 	<!--<div th:insert="~{fragments/nav :: nav}"></div>  -->
 	<div th:replace="fragments/nav-minimal :: nav"></div>
-	
+
+	<div class="floating-tags-container">
+		<span class="floating-tag tag-purple">{Ingénierie}</span> <span
+			class="floating-tag tag-red">{Cryptographie}</span> <span
+			class="floating-tag tag-cyan">{Développer}</span> <span
+			class="floating-tag tag-yellow">{Réseau}</span>
+	</div>
+
 
 	<!-- Message de déconnexion -->
 	<div th:if="${message}" class="alert alert-success">
@@ -110,17 +109,19 @@
 	</div>
 
 	<!-- Flèche de retour -->
-	<div class="back-button"><a th:href="@{/}">←</a></div>
+	<div class="back-button">
+		<a th:href="@{/}">←</a>
+	</div>
 
 	<!-- Contenu principal -->
 	<main class="module-container">
 
 		<div class="left-section">
-			<h2 th:text="${sousModule.titre}">Titre</h2>
 			<img th:src="@{${sousModule.imageUrl}}" alt="Image du sous-module" />
 		</div>
 
 		<div class="right-section">
+			<h2 th:text="${sousModule.titre}">Titre</h2>
 			<p>Explication du cours en quelques phrases. Explication du cours
 				en quelques phrases. Explication du cours en quelques phrases.
 				Explication du cours en quelques phrases.</p>
@@ -132,12 +133,15 @@
 				<a href="${sousModule.challenge}">Challenge</a> 
 			</div>
 			 -->
-			<div class="buttons">
-				<a th:href="@{'/modules/cours/' + ${coursId}}">Cours</a> 
-				<a th:href="@{'/modules/quiz/' + ${quizId}}">Quiz</a> 
-				<a th:href="@{'/modules/challenge/' + ${challengeId}}">Challenge</a>
-			</div>
 
+			<div class="buttons">
+				<div class="top-buttons">
+					<a th:href="@{'/modules/cours/' + ${coursId}}">Cours</a> <a
+						th:href="@{'/modules/quiz/' + ${quizId}}">Quiz</a>
+				</div>
+				<a class="bottom-button"
+					th:href="@{'/modules/challenge/' + ${challengeId}}">Challenge</a>
+			</div>
 
 		</div>
 

@@ -1,207 +1,343 @@
-/* ---- 🌑 Mode Sombre (par défaut) ---- */
 body {
-    font-family: 'Roboto', Arial, sans-serif;
-    background: linear-gradient(135deg, #18181e, #2c2c39);
-    color: #fff;
-    margin: 0;
-    padding: 0;
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
-    transition: background 0.5s ease, color 0.5s ease;
+	font-family: 'Space Mono', monospace;
+	font-style: normal;
+	font-weight: 400;
+	letter-spacing: -0.03em;
+	text-transform: none;
+	font-size: 16px; /* ou ce que tu veux comme base */
+	line-height: 1.5;
+	background: #fefbfc;
+	color: #333;
+	margin: 0;
+	padding: 0;
+	text-align: center;
+	display: flex;
+	flex-direction: column;
+	min-height: 100vh;
+	transition: background 0.5s ease, color 0.5s ease;
 }
 
 header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1.5rem 3rem;
-    background: rgba(44, 44, 57, 0.6); /* couleur plus transparente */
-    backdrop-filter: blur(10px); /* effet flou */
-    -webkit-backdrop-filter: blur(10px); /* pour Safari */
-    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
-    border-radius: 20px;
-    margin: 1rem auto;
-    width: 90%;
-    max-width: 1200px;
-    transition: background 0.5s ease;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 1.5rem 3rem;
+	margin: 1rem auto;
+	width: 90%;
+	max-width: 1200px;
 }
 
-
 header .logo h1 {
-    margin: 0;
-    font-size: 2rem;
-    background: linear-gradient(90deg, #ffffff, #2a2a3b);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    font-weight: bold;
+	margin: 0;
+	font-size: 2rem;
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+	font-weight: bold;
+}
+
+header nav ul {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+	display: flex;
+	gap: 2rem;
 }
 
 header nav ul li a {
-    text-decoration: none;
-    color: #ffffff;
-    font-weight: bold;
-    font-size: 1.1rem;
-    transition: color 0.3s ease;
+	text-decoration: none;
+	color: #333;
+	font-weight: bold;
+	font-size: 1.1rem;
+	transition: color 0.3s ease;
 }
 
 header nav ul li a:hover {
-    color: #f37500;
+	color: #9e2d66;
 }
 
-/* ---- 🎚️ Toggle Switch ---- */
+/* 🌑 Mode sombre */
+body.dark-mode {
+	background-color: #1a1a1a;
+	color: #f0f0f0;
+}
+
+body.dark-mode .nav-header, body.dark-mode .nav-link, body.dark-mode .nav-title
+	{
+	color: #f0f0f0;
+}
+
+body.dark-mode .full-menu {
+	background-color: #333;
+}
+
+body.dark-mode .full-menu li a {
+	color: #eee;
+}
+
+/* Toggle Switch */
 .toggle-container {
-    display: flex;
-    align-items: center;
-    cursor: pointer;
-    margin-left: 2rem;
+	width: 50px;
+	height: 24px;
+	background-color: #444;
+	border-radius: 20px;
+	position: relative;
+	cursor: pointer;
+	transition: background-color 0.3s ease;
 }
 
 .toggle-switch {
-    width: 50px;
-    height: 24px;
-    background: linear-gradient(to right, #ffffff, #2a2a3b);
-    border-radius: 12px;
-    position: relative;
-    transition: all 0.3s;
-}
-
-.toggle-switch::before {
-    content: '';
-    position: absolute;
-    width: 20px;
-    height: 20px;
-    background: white;
-    border-radius: 50%;
-    top: 50%;
-    left: 4px;
-    transform: translateY(-50%);
-    transition: all 0.3s;
-}
-
-/* 🌞 Mode Clair ---- */
-body.light-mode {
-    background: linear-gradient(135deg, #edf0f6, #e0e0e0);
-    color: #333;
-}
-
-body.light-mode header {
-    background: linear-gradient(90deg, #f6f9ff, #e0e0e0);
-}
-
-body.light-mode header nav ul li a {
-    color: #333;
-}
-
-body.light-mode .toggle-switch {
-    background: linear-gradient(to right, #bbb, #666);
-}
-
-body.light-mode .toggle-switch::before {
-    left: calc(100% - 24px);
+	width: 22px;
+	height: 22px;
+	background-color: white;
+	border-radius: 50%;
+	position: absolute;
+	top: 1px;
+	left: 1px;
+	transition: transform 0.3s ease;
 }
 
 /*************** NAVIGATION *************/
 nav {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1rem 2rem;
-    background-color: rgba(44, 44, 57, 0.1); 
-    backdrop-filter: blur(6px);
-    -webkit-backdrop-filter: blur(6px);
-    width: 80%;
-    margin: auto;
-    border-radius: 16px;
-    border: none; 
-    box-shadow: none; 
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 1rem 2rem;
+	width: 80%;
+	margin: auto;
 }
 
 .logo {
-    display: flex;
-    align-items: center;
+	display: flex;
+	align-items: center;
 }
 
 .logo img {
-    width: 7rem;
-    height: auto;
-    margin-right: 1rem; 
+	width: 7rem;
+	height: auto;
+	margin-right: 1rem;
 }
 
 nav h1 a {
-    text-decoration: none;
-    color: #fff;
-    font-size: 1.8rem;
+	text-decoration: none;
+	font-size: 1.8rem;
 }
 
-.nav-links {
-    display: flex;
-    list-style: none;
-    margin: 0;
-    padding: 0;
+.nav-link {
+	display: flex;
+	gap: 1.5rem;
+	list-style: none;
+	align-items: center;
+	padding: 0;
+	margin: 0;
 }
 
-.nav-links li {
-    margin-left: 2rem;
+.nav-link li a {
+	text-decoration: none;
+	color: #fff;
+	font-size: 1.2rem;
+	text-transform: uppercase;
 }
 
-.nav-links li a {
-    text-decoration: none;
-    color: #fff;
-    font-size: 1.2rem;
-    text-transform: uppercase;
-}
-
-.nav-links li a:hover {
+/*.nav-link li a:hover {
     color: #ff7f32;
-}
+} */
 
-
-/* --- Styles pour le menu burger (pour mobile) --- */
+/* --- Menu burger --- */
 .burger {
-    display: none;
-    flex-direction: column;
-    gap: 5px;
-    cursor: pointer;
+	display: none;
+	flex-direction: column;
+	gap: 5px;
+	cursor: pointer;
 }
 
-.burger .line {
-    width: 25px;
-    height: 3px;
-    background-color: #fff;
+.burger span {
+	height: 3px;
+	width: 25px;
+	background-color: white;
+	border-radius: 2px;
 }
 
-/* --- Media Query pour mobile --- */
-@media (max-width: 768px) {
-    .nav-links {
-        display: none; /* Masquer les liens sur mobile */
-        position: absolute;
-        top: 80px;
-        right: 0;
-        background-color: #2c2c39; /* Même fond que la nav */
-        width: 100%;
-        padding: 1rem;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }
+/* --- Responsive --- */
+@media ( max-width : 768px) {
+	.nav-link {
+		display: none;
+		flex-direction: column;
+		position: absolute;
+		top: 80px;
+		right: 0;
+		/*background-color: #212529; */
+		width: 100%;
+		padding: 1rem;
+	}
+	.nav-link.active {
+		display: flex;
+	}
+	.burger {
+		display: flex;
+	}
+	.nav-link li {
+		margin: 1rem 0;
+		text-align: center;
+	}
+	.nav-link li a {
+		font-size: 1.5rem;
+	}
+	.dropdown-menu {
+		position: static;
+		background-color: transparent;
+		display: none;
+		padding-left: 0;
+	}
+	.nav-item.dropdown:hover .dropdown-menu {
+		display: block;
+	}
+}
 
-    .nav-links.active {
-        display: flex; /* Afficher les liens lorsque la classe "active" est ajoutée */
-    }
+/************************ DROPDOWN ****************************/
+.nav-item {
+	position: relative;
+}
 
-    .burger {
-        display: flex; /* Afficher le menu burger sur mobile */
-    }
+.dropdown-menu {
+	display: none;
+	position: absolute;
+	top: 100%;
+	left: 0;
+	z-index: 1000;
+	min-width: 180px;
+	list-style: none;
+	font-size: 0.875rem;
+	background-color: transparent;
+	padding: 0;
+}
 
-    .nav-links li {
-        margin: 1rem 0;
-    }
+.nav-item:hover .dropdown-menu, .dropdown-menu.show {
+	display: block;
+}
 
-    .nav-links li a {
-        font-size: 1.5rem;
-    }
+.dropdown-item {
+	padding: 0.5rem 1rem;
+	font-weight: 400;
+	opacity: 0.9;
+	white-space: nowrap;
+}
+
+.dropdown-item:hover {
+	background-color: rgba(255, 255, 255, 0.1);
+}
+
+/**************** MODULES *******************/
+.modules {
+	padding: 2rem;
+}
+
+.card {
+	width: 250px;
+	height: 250px;
+	background: linear-gradient(135deg, #ffffff, #e0e0e0);
+	color: #333;
+	padding: 1.5rem;
+	border-radius: 20px;
+	text-align: center;
+	font-size: 1.2rem;
+	font-weight: bold;
+	cursor: pointer;
+	transition: transform 0.3s ease, box-shadow 0.3s ease;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+body.dark-mode .card {
+	background: linear-gradient(135deg, #2c2c39, #18181e);
+	color: #fff;
+}
+
+.card:hover, .card.create-account:hover {
+	transform: scale(1.07);
+	box-shadow: 0px 6px 20px #151515;
+}
+
+.card.create-account {
+	margin: auto;
+	height: auto;
+}
+
+.card.create-account input {
+	padding: 0.5rem;
+	border: none;
+	border-radius: 10px;
+	background-color: #1e1e2d;
+	color: white;
+	font-size: 0.7rem;
+	resize: none;
+	margin: 0.7rem;
+}
+
+/**************   BUTTON    **********************/
+button {
+	background-color: #9e2d66;
+	color: white;
+	border: none;
+	border-radius: 10px;
+	padding: 0.8rem;
+	font-size: 1rem;
+	cursor: pointer;
+	transition: background-color 0.3s ease;
+}
+
+button:hover {
+	background-color: #9e2d66;
+}
+
+button a {
+	text-decoration: none;
+	color: inherit;
+}
+
+#create-account {
+	text-decoration: none;
+}
+
+/*************** ACCESSIBILITÉ / FOOTER ****************/
+#accessibilityMenu {
+	right: 0;
+	left: auto;
+	min-width: 200px;
+	z-index: 1000;
+}
+
+footer {
+	margin-top: 2rem;
+	padding: 1rem;
+	background: #040925;
+	color: white;
+}
+
+footer .social-icons {
+	margin-top: 1rem;
+	display: flex;
+	justify-content: center;
+	gap: 1.5rem;
+}
+
+footer .social-icons a {
+	color: white;
+	text-decoration : none;
+}
+
+footer .social-icons a img {
+	width: 32px;
+	height: 32px;
+	filter: brightness(0) invert(1);
+	/* pour qu'elles soient blanches en dark mode */
+	transition: transform 0.3s ease;
+}
+
+footer .social-icons a img:hover {
+	transform: scale(1.2);
 }
 
 .user-info {
@@ -211,202 +347,25 @@ nav h1 a {
 	color: #ffffff;
 }
 
-.modules {
-    padding: 2rem;
+#typed-title::after, #typed-text::after {
+	content: '|';
+	animation: blink 1s infinite;
+	color: #982760;
 }
 
-.card {
-    width: 250px;
-    height: 250px;
-    background: linear-gradient(135deg, #2c2c39, #18181e);
-    color: #fff;
-    padding: 1.5rem;
-    border-radius: 20px;
-    text-align: center;
-    font-size: 1.2rem;
-    font-weight: bold;
-    cursor: pointer;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+@
+keyframes blink { 0%, 100% {
+	opacity: 1;
 }
 
-.card:hover, .card.create-account:hover {
-    transform: scale(1.07);
-    box-shadow: 0px 6px 20px #151515;
+50
+%
+{
+opacity
+:
+0;
 }
-.card.create-account {
-	margin: auto;
-	height: auto;
 }
-
-.card.create-account input {
-    padding: 0.5rem;
-    border: none;
-    border-radius: 10px;
-    background-color: #1e1e2d;
-    color: white;
-    font-size: 0.7rem;
-    resize: none;
-    margin: 0.7rem;
-
-}
-
-body.light-mode .card {
-    background: linear-gradient(135deg, #ffffff, #e0e0e0);
-    color: #333;
-}
-
-/**************   BUTTON    **********************/
-button {
-    background-color: #f37500;
-    color: white;
-    border: none;
-    border-radius: 10px;
-    padding: 0.8rem;
-    font-size: 1rem;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-button  a {
-	text-decoration: none;
-}
-
-button:hover {
-    background-color: #ff8c1a;
-}
-
-#create-account {
-	text-decoration: none;
-}
-
-/************************ NAV ****************************/
-.nav-links {
-  display: flex;
-  align-items: center;
-  list-style: none;
-  gap: 1.5rem;
-  position: relative;
-}
-
-.nav-item {
-  position: relative;
-}
-
-.dropdown-menu {
-  display: none;
-  position: absolute;
-  top: 100%;
-  left: 0;
-  z-index: 1000;
-  min-width: 180px;
-  border: none;
-  list-style: none;         /* 🔹 Retire les puces */
-  font-size: 0.875rem;      /* 🔹 Réduit la taille du texte (équivalent à 14px environ) */
-  padding: 0; 
-  background-color: transparent;  /* 🔹 Fond transparent */
-  border: none;                   /* 🔹 Supprime les bordures */
-  box-shadow: none; 
-}
-
-.nav-item:hover .dropdown-menu {
-  display: block;
-}
-
-.dropdown-menu .dropdown-item {
-  white-space: nowrap;
-  font-size: 0.875rem;      /* 🔹 S'assure que chaque item garde la taille réduite */
-  padding: 0.5rem 1rem;
-  background-color: transparent;  /* 🔹 Pas de fond au survol par défaut */
-  color: white; 
-}
-
-.dropdown-menu .dropdown-item:hover {
-  background-color: rgba(255, 255, 255, 0.1);  /* Léger fond au hover */
-}
-
-.dropdown-menu.show {
-  display: block;
-}
-
-.dropdown-item {
-  font-weight: 400;
-  opacity: 0.9;
-}
-
-/********************RESPONSIVE : MENU BURGER*********************/
-.burger {
-  display: none;
-  flex-direction: column;
-  cursor: pointer;
-  gap: 5px;
-}
-
-.burger span {
-  height: 3px;
-  width: 25px;
-  background-color: white;
-  border-radius: 2px;
-}
-
-/* Responsive rules */
-@media screen and (max-width: 768px) {
-  .burger {
-    display: flex;
-  }
-
-  .nav-links {
-    position: absolute;
-    top: 100%;
-    left: 0;
-    right: 0;
-    flex-direction: column;
-    background-color: #212529;
-    display: none;
-    gap: 0;
-  }
-
-  .nav-links.active {
-    display: flex;
-  }
-
-  .nav-links li {
-    text-align: center;
-    padding: 1rem 0;
-  }
-}
-
-@media screen and (max-width: 768px) {
-  .dropdown-menu {
-    position: static;  /* 🛠️ Plus de position absolue en mobile */
-    background-color: transparent;
-    box-shadow: none;
-    border: none;
-    display: none;      /* On cache par défaut */
-    padding-left: 0;
-  }
-
-  .nav-item.dropdown:hover .dropdown-menu {
-    display: block;     /* Affiche au survol ou clic */
-  }
-
-  .dropdown-item {
-    text-align: center; /* Centre les liens */
-  }
-}
-
-footer {
-	margin-top: 3rem;
-}
-
-/* Menu accessibilité : évite qu’il s’affiche tout à gauche */
-#accessibilityMenu {
-    right: 0;
-    left: auto;
-    min-width: 200px;
-    z-index: 1000;
+i.bi.bi-linkedin {
+	color: white;
 }

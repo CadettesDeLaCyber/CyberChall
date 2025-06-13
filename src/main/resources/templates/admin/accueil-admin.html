@@ -3,90 +3,28 @@
 
 <div th:insert="~{fragments/header :: header}"></div>
 
-<body>
+<!-- Message de déconnexion -->
+<div th:if="${message}" class="alert alert-success">
+	<p th:text="${message}"></p>
+</div>
 
-	<!-- NAVIGATION depuis le fragment nav -->
-	<div th:insert="~{fragments/nav :: nav}"></div>
+<body class="container">
 
-	<!-- Message de déconnexion -->
-	<div th:if="${message}" class="alert alert-success">
-		<p th:text="${message}"></p>
+	<!-- NAVIGATION -->
+	<!--<div th:insert="~{fragments/nav :: nav}"></div>  -->
+	<div th:replace="fragments/nav-minimal :: nav"></div>
+
+	<div class="floating-tags-container">
+		<span class="floating-tag tag-purple">{Ingénierie}</span> <span
+			class="floating-tag tag-red">{Cryptographie}</span> <span
+			class="floating-tag tag-cyan">{Développer}</span> <span
+			class="floating-tag tag-yellow">{Réseau}</span>
 	</div>
-	<style>
-h2 {
-	margin: 3.5rem;
-	text-align: left;
-}
 
-.card-module {
-	background: linear-gradient(135deg, #18181e, #2c2c39);
-	border-radius: 2rem;
-	padding: 1rem;
-	margin: 2rem auto;
-	display: flex;
-	width: 90%;
-}
-
-.element-module {
-	width: 30%;
-}
-
-.card-image {
-	width: 90%;
-	border-radius: 1rem;
-	padding: 0.5rem 0;
-}
-
-.card-title {
-	margin-bottom: 0.5rem;
-}
-
-.sous-module-container {
-	display: flex;
-	align-items: center;
-	width: 70%;
-	overflow: hidden;
-	padding-left: 1rem;
-}
-
-.sous-module-slider {
-	display: flex;
-	gap: 1rem;
-	overflow-x: auto;
-	scroll-behavior: smooth;
-	max-width: 100%;
-}
-
-.sous-module {
-	min-width: 250px;
-	background-color: #34344a;
-	padding: 0.5rem;
-	border-radius: 1rem;
-	text-align: center;
-}
-
-.sous-module img {
-	width: 90%;
-	border-radius: 0.5rem;
-}
-
-.arrow-button {
-	background: none;
-	border: none;
-	color: white;
-	font-size: 1.5rem;
-	cursor: pointer;
-	padding: 0 1rem;
-}
-</style>
-</head>
-
-<body>
-<div>
-	<!-- Message de bienvenue -->
 	<div>
+		<!-- Message de bienvenue -->
 		<h2 th:if="${admin != null}">
-			Bienvenue, <span style="color: #f37500;" th:text="${admin.username}">Admin</span>
+			Bienvenue, <span style="color: #982760;" th:text="${admin.username}">Admin</span>
 			👋
 		</h2>
 		<h2 th:if="${admin == null}">Bienvenue invité 👋</h2>
@@ -96,103 +34,46 @@ h2 {
 	<p th:if="${isSessionMode}" class="text-warning text-center fw-bold">
 		⚠️ Vous êtes dans une session temporaire. Vos données ne seront pas
 		sauvegardées.</p>
-		
-	<!-- accueil-admin.html -->
-	
-		<main>
-			<div class="container">
-				<!-- Affichage des modules -->
-				<div th:each="module, iterStat : ${modules}"
-					class="card-module row col-12 mb-4">
-					<!-- Titre & image du module -->
-					<div class="element-module">
-						<h3 class="card-title" th:text="${module.nom}"></h3>
-						<img th:src="@{${module.image}}" alt="Image du module"
-							class="card-image" />
-					</div>
 
-					<!-- Sous-modules avec slider -->
-					<div class="card-body sous-module-container">
-						<button class="arrow-button arrow-left" type="button"
-							th:attr="data-slider-id='slider-' + ${iterStat.index}">&#8592;</button>
+	<main>
+		<!-- Affichage des modules -->
+		<div th:each="module, iterStat : ${modules}"
+			class="card-module row col-12 mb-4">
+			<!-- Titre & image du module -->
+			<div class="element-module">
+				<h3 class="card-title" th:text="${module.nom}"></h3>
+				<img th:src="@{${module.image}}" alt="Image du module"
+					class="card-image" />
+			</div>
 
-						<div class="sous-module-slider"
-							th:id="'slider-' + ${iterStat.index}">
-							<div th:each="sm : ${module.sousModules}" class="sous-module">
-								<h6 class="card-title" th:text="${sm.titre}"></h6>
-								<a th:href="@{'/modules/accueil-modules/' + ${sm.id}}"> <img
-									th:src="${sm.imageUrl}" alt="Image du sous-module" />
-								</a>
+			<!-- Sous-modules avec slider -->
+			<div class="card-body sous-module-container">
+				<button class="arrow-button arrow-left" type="button"
+					th:attr="data-slider-id='slider-' + ${iterStat.index}">&#8592;</button>
 
-								<!-- <a th:href="@{/modules/accueil-modules}"> <img th:src="@{${sm.imageUrl}}"
+				<div class="sous-module-slider"
+					th:id="'slider-' + ${iterStat.index}">
+					<div th:each="sm : ${module.sousModules}" class="sous-module">
+						<h6 class="card-subtitle" th:text="${sm.titre}"></h6>
+						<a th:href="@{'/modules/accueil-modules/' + ${sm.id}}"> <img
+							th:src="${sm.imageUrl}" alt="Image du sous-module" />
+						</a>
+
+						<!-- <a th:href="@{/modules/accueil-modules}"> <img th:src="@{${sm.imageUrl}}"
 								alt="Image du sous-module" class="sm-card-image" />
 							</a> -->
-							</div>
-						</div>
-
-						<button class="arrow-button arrow-right" type="button"
-							th:attr="data-slider-id='slider-' + ${iterStat.index}">&#8594;</button>
 					</div>
 				</div>
+
+				<button class="arrow-button arrow-right" type="button"
+					th:attr="data-slider-id='slider-' + ${iterStat.index}">&#8594;</button>
 			</div>
-		</main>
+		</div>
 
-
-	<!-- Script slider -->
-	<script>
-function updateArrowVisibility(slider, leftArrow, rightArrow) {
-    // Cache la flèche gauche si on est au début
-    if (slider.scrollLeft <= 0) {
-        leftArrow.style.visibility = 'hidden';
-    } else {
-        leftArrow.style.visibility = 'visible';
-    }
-
-    // Cache la flèche droite si on est à la fin
-    if (slider.scrollLeft + slider.offsetWidth >= slider.scrollWidth - 1) {
-        rightArrow.style.visibility = 'hidden';
-    } else {
-        rightArrow.style.visibility = 'visible';
-    }
-}
-
-document.querySelectorAll('.card-module').forEach(module => {
-    const slider = module.querySelector('.sous-module-slider');
-    const leftArrow = module.querySelector('.arrow-left');
-    const rightArrow = module.querySelector('.arrow-right');
-
-    if (!slider || !leftArrow || !rightArrow) return;
-
-    // Initialiser la visibilité
-    updateArrowVisibility(slider, leftArrow, rightArrow);
-
-    // Ajouter l'écoute sur scroll manuel aussi
-    slider.addEventListener('scroll', () => {
-        updateArrowVisibility(slider, leftArrow, rightArrow);
-    });
-
-    // Ajouter les événements aux flèches
-    [leftArrow, rightArrow].forEach(button => {
-        button.addEventListener('click', () => {
-            const direction = button.classList.contains('arrow-left') ? -1 : 1;
-            const scrollAmount = 300;
-
-            slider.scrollBy({
-                left: direction * scrollAmount,
-                behavior: 'smooth'
-            });
-
-            // Laisser le scroll se faire puis mettre à jour les flèches
-            setTimeout(() => {
-                updateArrowVisibility(slider, leftArrow, rightArrow);
-            }, 300);
-        });
-    });
-});
-</script>
+	</main>
 
 	<!-- FOOTER -->
 	<div th:insert="~{fragments/footer :: footer}"></div>
-</div>
+
 </body>
 </html>

@@ -1,147 +1,217 @@
 <!-- NAVIGATION MINIMALE -->
 <div th:fragment="nav">
-    <header class="nav-header">
-        <nav class="nav-container">
-            <!-- Logo -->
-            <div class="logo">
-                <img src="/images/logo.png" alt="Logo Cadettes de la Cyber" />
-            </div>
+	<header class="nav-header">
 
-            <!-- Titre -->
-            <h1 class="nav-title">CyberChall</h1>
+		<style>
+			#deco {
+				background-color: #9e2d66;
+				padding: 0.6rem;
+				color: white;
+			}
 
-            <!-- Déconnexion + Burger -->
-            <div class="nav-actions">
-                <a th:href="@{/deconnexion}" class="nav-link">Déconnexion</a>
-                <div class="burger-icon" onclick="toggleFullMenu()">+</div>
-            </div>
-        </nav>
+			a#roue.nav-link {
+				font-size: 1.5rem;
+			}
 
-        <!-- Menu déroulant -->
-        <ul id="fullMenu" class="full-menu">
-            <li><a th:href="@{/}">Accueil</a></li>
-            <li><a th:href="@{/admin/account}">Mon Compte</a></li>
-            <li><a th:href="@{/session/session}">Mes sessions</a></li>
-            <li><a th:href="@{/admin/create-account}">Créer compte</a></li>
-            <li><a th:href="@{/session/session-statistic}">Statistiques</a></li>
-            <li><a th:href="@{/contact}">Contact</a></li>
-        </ul>
-    </header>
+			.nav-header {
+				position: relative;
+				height: 80px;
+				display: flex;
+				align-items: center;
+				z-index: 1000;
+			}
 
-    <script>
-        function toggleFullMenu() {
-            const menu = document.getElementById("fullMenu");
-            menu.classList.toggle("open");
-        }
-    </script>
+			.nav-container {
+				width: 100%;
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+				padding: 0 20px;
+			}
 
-    <style>
-        .nav-header {
-            background: linear-gradient(to right, #1d1d27, #0d0d0d);
-            color: white;
-            position: relative;
-            height: 80px; /* hauteur alignée */
-            display: flex;
-            align-items: center;
-            z-index: 1000;
-        }
+			.logo img {
+				height: 52px;
+			}
 
-        .nav-container {
-            width: 100%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0 20px;
-        }
+			.nav-title {
+				margin: 0;
+				font-size: 30px;
+				font-weight: bold;
+			}
 
-        .logo img {
-            height: 40px;
-        }
+			.nav-actions {
+				display: flex;
+				align-items: center;
+				gap: 20px;
+			}
 
-        .nav-title {
-            margin: 0;
-            font-size: 24px;
-            font-weight: bold;
-        }
+			.nav-link {
+				text-decoration: none;
+				font-weight: 500;
+			}
 
-        .nav-actions {
-            display: flex;
-            align-items: center;
-            gap: 20px;
-        }
+			.burger-icon {
+				font-size: 32px;
+				cursor: pointer;
+				user-select: none;
+			}
 
-        .nav-link {
-            text-decoration: none;
-            color: white;
-            font-weight: 500;
-        }
+			.full-menu {
+				position: absolute;
+				top: 80px;
+				right: 20px;
+				background-color: #982760;
+				list-style: none;
+				margin: 0;
+				padding: 0;
+				max-height: 0;
+				overflow: hidden;
+				transition: max-height 0.4s ease;
+				width: 220px;
+				border-radius: 6px;
+			}
 
-        .burger-icon {
-            font-size: 32px;
-            cursor: pointer;
-            user-select: none;
-        }
+			.full-menu.open {
+				max-height: 500px;
+			}
 
-        .full-menu {
-            position: absolute;
-            top: 80px;
-            right: 20px;
-            background-color: #111;
-            list-style: none;
-            margin: 0;
-            padding: 0;
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.4s ease;
-            width: 220px;
-            border: 1px solid #333;
-            border-radius: 6px;
-        }
+			.full-menu li {
+				border-bottom: 1px solid #222;
+			}
 
-        .full-menu.open {
-            max-height: 500px;
-        }
+			.full-menu li a {
+				display: block;
+				padding: 12px 16px;
+				color: white;
+				text-decoration: none;
+				text-align: right;
+			}
 
-        .full-menu li {
-            border-bottom: 1px solid #222;
-        }
+			.full-menu li a:hover {
+				background-color:#FF6856;
+			}
 
-        .full-menu li a {
-            display: block;
-            padding: 12px 16px;
-            color: white;
-            text-decoration: none;
-            text-align: right;
-        }
+			/* Footer */
+			footer {
+				text-align: center;
+				padding: 20px;
+			}
 
-        .full-menu li a:hover {
-            background-color: #222;
-        }
+			footer .wrapper {
+				max-width: 1200px;
+				margin: 0 auto;
+			}
 
-        @media (max-width: 768px) {
-            .nav-title {
-                font-size: 18px;
-            }
+			/* Responsive */
+			@media (max-width: 768px) {
+				.nav-title {
+					font-size: 18px;
+				}
 
-            .nav-link {
-                font-size: 14px;
-            }
+				.nav-link {
+					font-size: 14px;
+				}
 
-            .burger-icon {
-                font-size: 28px;
-            }
-        }
+				.burger-icon {
+					font-size: 28px;
+				}
+			}
 
-        /* CENTRAGE DU FOOTER */
-        footer {
-            text-align: center;
-            padding: 20px;
-            color: white;
-        }
+			/* Toggle dark mode switch */
+			.toggle-container {
+				width: 50px;
+				height: 24px;
+				background-color: #444;
+				border-radius: 20px;
+				position: relative;
+				cursor: pointer;
+				transition: background-color 0.3s ease;
+				margin-left: auto;
+			}
 
-        footer .wrapper {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-    </style>
+			.toggle-switch {
+				width: 22px;
+				height: 22px;
+				background-color: white;
+				border-radius: 50%;
+				position: absolute;
+				top: 1px;
+				left: 1px;
+				transition: transform 0.3s ease;
+			}
+
+			body.dark-mode .toggle-container {
+				background-color: #888;
+			}
+
+			body.dark-mode .toggle-switch {
+				transform: translateX(26px);
+			}
+		</style>
+
+		<nav class="nav-container">
+			<!-- Logo -->
+			<div class="logo">
+				<a th:href="@{/}"><img src="/images/logo_cadettes.png" alt="Logo Cadettes de la Cyber" /></a>
+			</div>
+
+			<!-- Titre -->
+			<h1 class="nav-title"><a th:href="@{/}">CyberChall</a></h1>
+
+			<!-- Actions de navigation -->
+			<div class="nav-actions">
+				<a th:href="@{/deconnexion}" class="nav-link" id="deco">Déconnexion</a>
+
+				<ul>
+					<li class="nav-item dropdown position-relative">
+						<a href="#" class="nav-link" id="roue" onclick="toggleAccessibilityMenu()" title="Accessibilité">⚙️</a>
+						<ul class="dropdown-menu dropdown-menu-dark position-absolute" id="accessibilityMenu" style="display: none;">
+							<li><a href="#" onclick="adjustFontSize(1)">🔎 Agrandir le texte</a></li>
+							<li><a href="#" onclick="adjustFontSize(-1)">🔍 Réduire le texte</a></li>
+							<li>
+								<div class="toggle-container" onclick="toggleDarkMode()">
+									<div class="toggle-switch"></div>
+								</div>
+							</li>
+						</ul>
+					</li>
+				</ul>
+
+				<div class="burger-icon" onclick="toggleFullMenu()">+</div>
+			</div>
+		</nav>
+
+		<!-- Menu déroulant -->
+		<ul id="fullMenu" class="full-menu">
+			<li><a th:href="@{/}">Accueil</a></li>
+			<li><a th:href="@{/admin/account}">Mon Compte</a></li>
+			<li><a th:href="@{/session/session}">Mes sessions</a></li>
+			<li><a th:href="@{/admin/create-account}">Créer compte</a></li>
+			<li><a th:href="@{/session/session-statistic}">Statistiques</a></li>
+			<li><a th:href="@{/contact}">Contact</a></li>
+		</ul>
+	</header>
+
+	<script>
+		function toggleFullMenu() {
+			const menu = document.getElementById("fullMenu");
+			menu.classList.toggle("open");
+		}
+
+		function toggleAccessibilityMenu() {
+			const menu = document.getElementById("accessibilityMenu");
+			menu.style.display = menu.style.display === "none" ? "block" : "none";
+		}
+
+		function adjustFontSize(change) {
+			const body = document.body;
+			const currentSize = parseFloat(getComputedStyle(body).fontSize);
+			body.style.fontSize = (currentSize + change) + "px";
+		}
+
+		function toggleDarkMode() {
+		    toggleMode();
+		}
+
+	</script>
 </div>

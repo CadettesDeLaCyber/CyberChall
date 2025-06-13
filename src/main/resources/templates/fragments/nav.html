@@ -3,7 +3,7 @@
 		<header>
 			<nav>
 				<div class="logo">
-					<img src="/images/logo.png" alt="Logo Cadettes de la Cyber">
+					<a th:href="@{/}"><img src="/images/logo_cadettes.png" alt="Logo Cadettes de la Cyber" /></a>
 					<h1>
 						<a th:href="@{/}">CyberChall</a>
 					</h1>
@@ -61,9 +61,10 @@
 				</ul>
 
 
-				<div class="toggle-container" onclick="toggleMode()">
-					<div class="toggle-switch"></div>
+				<div class="toggle-container">
+					<div class="toggle-switch" id="themeToggle"></div>
 				</div>
+
 			</nav>
 		</header>
 	</div>

@@ -1,0 +1,76 @@
+
+.floating-tags-container {
+  position: absolute; /* ou absolute selon contexte */
+  top: 6rem;       /* place là où tu veux */
+  left: 0;
+  width: 100%;     /* ou largeur adaptée */
+  height: 80px;
+  overflow: visible; /* pour que les tags animés ne soient pas coupés */
+  margin-top: 0;    /* supprimer margin si besoin */
+  z-index: 1; /* plus bas */
+  pointer-events: none; /* optionnel, pour ne pas gêner les clics en dessous */
+}
+
+h1, nav {
+  position: relative; /* ou fixed selon le cas */
+  z-index: 10; /* plus haut */
+}
+
+.floating-tag {
+  position: absolute;
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-weight: bold;
+  font-family: sans-serif;
+  animation: float 12s infinite ease-in-out;
+  white-space: nowrap;
+}
+
+/* Couleurs */
+.tag-purple {
+  background-color: #d1b3ff; /* violet clair */
+  color: #1a0033;
+  left: 5%;
+  top: 20%;
+  animation-delay: 0s;
+}
+.tag-red {
+  background-color: #ff6b6b;
+  color: #330000;
+  left: 45%;
+  top: 50%;
+  animation-delay: 1s;
+}
+.tag-cyan {
+  background-color: #4ff1f1;
+  color: #002b2b;
+  left: 25%;
+  top: 30%;
+  animation-delay: 2s;
+}
+.tag-yellow {
+  background-color: #fff58c;
+  color: #333000;
+  left: 65%;
+  top: 10%;
+  animation-delay: 3s;
+}
+
+/* Animation flottante */
+@keyframes float {
+  0% {
+    transform: translateY(0px) translateX(0px) rotate(0deg);
+  }
+  25% {
+    transform: translateY(-15px) translateX(30px) rotate(-5deg);
+  }
+  50% {
+    transform: translateY(0px) translateX(-30px) rotate(5deg);
+  }
+  75% {
+    transform: translateY(15px) translateX(15px) rotate(0deg);
+  }
+  100% {
+    transform: translateY(0px) translateX(0px) rotate(-5deg);
+  }
+}
