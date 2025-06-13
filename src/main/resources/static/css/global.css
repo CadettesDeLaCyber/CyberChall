@@ -234,8 +234,7 @@ nav h1 a {
 .card {
 	width: 250px;
 	height: 250px;
-	background: linear-gradient(135deg, #ffffff, #e0e0e0);
-	color: #333;
+	color: white;
 	padding: 1.5rem;
 	border-radius: 20px;
 	text-align: center;
@@ -248,6 +247,7 @@ nav h1 a {
 	justify-content: center;
 	align-items: center;
 	box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+	background-color: #18052E;
 }
 
 body.dark-mode .card {
@@ -269,8 +269,6 @@ body.dark-mode .card {
 	padding: 0.5rem;
 	border: none;
 	border-radius: 10px;
-	background-color: #1e1e2d;
-	color: white;
 	font-size: 0.7rem;
 	resize: none;
 	margin: 0.7rem;
@@ -353,19 +351,15 @@ footer .social-icons a img:hover {
 	color: #982760;
 }
 
-@
-keyframes blink { 0%, 100% {
-	opacity: 1;
+@keyframes blink {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
 }
 
-50
-%
-{
-opacity
-:
-0;
-}
-}
 i.bi.bi-linkedin {
-	color: white;
+  color: white;
 }

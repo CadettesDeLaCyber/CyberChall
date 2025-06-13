@@ -3,28 +3,43 @@
 
 <div th:insert="~{fragments/header :: header}"></div>
 
+<!-- Message de déconnexion -->
+<div th:if="${message}" class="alert alert-success">
+	<p th:text="${message}"></p>
+</div>
+
 <body>
+	<div class="container">
 
-    <!-- NAVIGATION depuis le fragment nav -->
-    <div th:insert="~{fragments/nav :: nav}"></div>
+		<!-- NAVIGATION -->
+		<!--<div th:insert="~{fragments/nav :: nav}"></div>  -->
+		<div th:replace="fragments/nav-minimal :: nav"></div>
 
-<section class="contact-section">
-    <h2>Contacte-nous 📩</h2>
-    <h3>Via Email</h3>
-            <p class="info-line">
-                <a class="highlight-link" href="mailto:cadettecyber@gmail.com">cadettecyber@gmail.com</a>
-            </p>
-    <h3>Via Formulaire</h3>
-    <form action="/envoyer-message" method="post" class="contact-form">
-        <input type="text" name="nom" placeholder="Ton nom" required>
-        <input type="email" name="email" placeholder="Ton email" required>
-        <textarea name="message" rows="5" placeholder="Ton message..." required></textarea>
-        <button type="submit">Envoyer</button>
-    </form>
-</section>
-    <!-- FOOTER -->
-    <div th:insert="~{fragments/footer :: footer}"></div>
-    
+		<div class="floating-tags-container">
+			<span class="floating-tag tag-purple">{Ingénierie}</span> <span
+				class="floating-tag tag-red">{Cryptographie}</span> <span
+				class="floating-tag tag-cyan">{Développer}</span> <span
+				class="floating-tag tag-yellow">{Réseau}</span>
+		</div>
 
+		<section class="contact-section">
+			<h2>Nous contacter 📩</h2>
+			<h3>Via Email</h3>
+			<p class="info-line">
+				<a class="highlight-link" href="mailto:cadettecyber@gmail.com">cadettecyber@gmail.com</a>
+			</p>
+			<h3>Via Formulaire</h3>
+			<form action="/envoyer-message" method="post" class="contact-form">
+				<input type="text" name="nom" placeholder="Ton nom" required>
+				<input type="email" name="email" placeholder="Ton email" required>
+				<textarea name="message" rows="5" placeholder="Ton message..."
+					required></textarea>
+				<button type="submit">Envoyer</button>
+			</form>
+		</section>
+		<!-- FOOTER -->
+		<div th:insert="~{fragments/footer :: footer}"></div>
+
+	</div>
 </body>
 </html>

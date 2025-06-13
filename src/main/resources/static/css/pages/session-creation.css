@@ -1,77 +1,73 @@
+.session-container.create {
+	background: linear-gradient(135deg, #2c2c39, #18181e);
+	padding: 2rem;
+	border-radius: 20px;
+	box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+	max-width: 500px;
+	width: 100%;
+	text-align: center;
+	transition: background 0.5s ease;
+	margin: auto;
+}
 
-        .session-container.create {
-            background: linear-gradient(135deg, #2c2c39, #18181e);
-            padding: 2rem;
-            border-radius: 20px;
-            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
-            max-width: 500px;
-            width: 100%;
-            text-align: center;
-            transition: background 0.5s ease;
-            margin: auto;
-        }
+/* 🌟 Boutons des modules session-container*/
+.session-container.create .module {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	background: rgba(255, 255, 255, 0.1);
+	border-radius: 50px;
+	padding: 2rem;
+	margin: 2rem;
+	font-size: 1rem;
+	cursor: pointer;
+	transition: background 0.3s ease, transform 0.2s ease;
+	text-align: left;
+	min-height: auto !important;
+}
 
-        .session-container.create h2 {
-            margin-bottom: 1rem;
-        }
+.session-container.create .module:hover {
+	background: rgba(255, 255, 255, 0.2);
+	transform: scale(1.03);
+}
 
-        /* 🌟 Boutons des modules session-container*/
-        .session-container.create .module {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 50px;
-            padding: 2rem;
-            margin: 2rem;
-            font-size: 1rem;
-            cursor: pointer;
-            transition: background 0.3s ease, transform 0.2s ease;
-            text-align: left;
-            min-height: auto !important;
-        }
+.session-container.create .module input {
+	margin-right: 10px;
+}
 
-        .session-container.create .module:hover {
-            background: rgba(255, 255, 255, 0.2);
-            transform: scale(1.03);
-        }
+/* 🌟 Bouton valider */
+.session-container.create .validate-btn {
+	width: 100%;
+	padding: 12px;
+	margin-top: 15px;
+	border-radius: 50px;
+	font-size: 1rem;
+	color: #fff;
+	display: none; /* Caché par défaut */
+	background: rgba(255, 255, 255, 0.1);
+	/* ----couleur orange #f37500; ---- */
+	border: none;
+	cursor: pointer;
+	transition: background 0.3s;
+}
 
-        .session-container.create .module input {
-            margin-right: 10px;
-        }
+.session-container.create .validate-btn:hover {
+	background: rgba(255, 255, 255, 0.2);
+}
 
-        /* 🌟 Bouton valider */
-        .session-container.create .validate-btn {
-            width: 100%;
-            padding: 12px;
-            margin-top: 15px;
-            border-radius: 50px;
-            font-size: 1rem;
-            color: #fff;
-            display: none; /* Caché par défaut */
-            background: rgba(255, 255, 255, 0.1); /* ----couleur orange #f37500; ---- */
-            border: none;
-            cursor: pointer;
-            transition: background 0.3s;
-        }
+/* 🌟 Lien généré */
+.session-container.create .link-container {
+	margin-top: 20px;
+	font-size: 1rem;
+	display: none; /* Caché par défaut */
+}
 
-        .session-container.create .validate-btn:hover {
-            background: rgba(255, 255, 255, 0.2);
-        }
+.session-container.create .link-container a {
+	color: #ff8800;
+	font-weight: bold;
+	text-decoration: none;
+}
 
-        /* 🌟 Lien généré */
-        .session-container.create .link-container {
-            margin-top: 20px;
-            font-size: 1rem;
-            display: none; /* Caché par défaut */
-        }
-
-        .session-container.create .link-container a {
-            color: #ff8800;
-            font-weight: bold;
-            text-decoration: none;
-        }
-
-        .session-container.create .link-container a:hover {
-            text-decoration: underline;
-        }
+.session-container.create .link-container a:hover {
+	text-decoration: underline;
+}

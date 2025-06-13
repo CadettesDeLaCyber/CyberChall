@@ -72,50 +72,50 @@ h2 {
 </style>
 
 <body>
+	<div class="container">
+		<!-- Message -->
+		<div>
+			<h2>Bienvenue invité 👋</h2>
+		</div>
 
-	<!-- Message -->
-	<div>
-		<h2>Bienvenue invité 👋</h2>
-	</div>
+		<!-- ⚠️ Message de session temporaire -->
+		<p th:if="${isSessionMode}" class="text-warning text-center fw-bold">
+			⚠️ Vous êtes dans une session temporaire. Vos données ne seront pas
+			sauvegardées.</p>
 
-	<!-- ⚠️ Message de session temporaire -->
-	<p th:if="${isSessionMode}" class="text-warning text-center fw-bold">
-		⚠️ Vous êtes dans une session temporaire. Vos données ne seront pas
-		sauvegardées.</p>
-
-	<main>
-		<div class="container">
-			<div th:each="module, iterStat : ${modules}"
-				class="card-module row col-12 mb-4">
-				<div class="element-module">
-					<h3 class="card-title" th:text="${module.nom}"></h3>
-					<img th:src="@{${module.image}}" alt="Image du module"
-						class="card-image" />
-				</div>
-
-				<div class="card-body sous-module-container">
-					<button class="arrow-button arrow-left" type="button"
-						th:attr="data-slider-id='slider-' + ${iterStat.index}">&#8592;</button>
-
-					<div class="sous-module-slider"
-						th:id="'slider-' + ${iterStat.index}">
-						<div th:each="sm : ${module.sousModules}" class="sous-module">
-							<h6 class="card-title" th:text="${sm.titre}"></h6>
-							<a th:href="@{'/modules/accueil-modules/' + ${sm.id}}"> <img
-								th:src="${sm.imageUrl}" alt="Image du sous-module" />
-							</a>
-						</div>
+		<main>
+			<div class="container">
+				<div th:each="module, iterStat : ${modules}"
+					class="card-module row col-12 mb-4">
+					<div class="element-module">
+						<h3 class="card-title" th:text="${module.nom}"></h3>
+						<img th:src="@{${module.image}}" alt="Image du module"
+							class="card-image" />
 					</div>
 
-					<button class="arrow-button arrow-right" type="button"
-						th:attr="data-slider-id='slider-' + ${iterStat.index}">&#8594;</button>
+					<div class="card-body sous-module-container">
+						<button class="arrow-button arrow-left" type="button"
+							th:attr="data-slider-id='slider-' + ${iterStat.index}">&#8592;</button>
+
+						<div class="sous-module-slider"
+							th:id="'slider-' + ${iterStat.index}">
+							<div th:each="sm : ${module.sousModules}" class="sous-module">
+								<h6 class="card-title" th:text="${sm.titre}"></h6>
+								<a th:href="@{'/modules/accueil-modules/' + ${sm.id}}"> <img
+									th:src="${sm.imageUrl}" alt="Image du sous-module" />
+								</a>
+							</div>
+						</div>
+
+						<button class="arrow-button arrow-right" type="button"
+							th:attr="data-slider-id='slider-' + ${iterStat.index}">&#8594;</button>
+					</div>
 				</div>
 			</div>
-		</div>
-	</main>
+		</main>
 
-	<!-- Script Slider -->
-	<script>
+		<!-- Script Slider -->
+		<script>
 function updateArrowVisibility(slider, leftArrow, rightArrow) {
     leftArrow.style.visibility = slider.scrollLeft <= 0 ? 'hidden' : 'visible';
     rightArrow.style.visibility = slider.scrollLeft + slider.offsetWidth >= slider.scrollWidth - 1 ? 'hidden' : 'visible';
@@ -142,6 +142,8 @@ document.querySelectorAll('.card-module').forEach(module => {
 });
 </script>
 
-	<div th:insert="~{fragments/footer :: footer}"></div>
+		<div th:insert="~{fragments/footer :: footer}"></div>
+
+	</div>
 </body>
 </html>

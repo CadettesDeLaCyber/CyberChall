@@ -3,43 +3,52 @@
 
 <div th:insert="~{fragments/header :: header}"></div>
 
-
 <body>
+	<div class="container">
 
-	<!-- NAVIGATION depuis le fragment nav -->
-	<div th:insert="~{fragments/nav :: nav}"></div>
+		<!-- NAVIGATION -->
+		<!--<div th:insert="~{fragments/nav :: nav}"></div>  -->
+		<div th:replace="fragments/nav:: nav"></div>
 
-	<section class="create-account">
-
-		<h1>Création de Compte</h1>
-		<div class="container mt-5">
-			<div class="card create-account shadow-sm">
-				<div class="card-body">
-					<h3 class="card-title mb-4">Créer un compte</h3>
-					<form action="/create-account" method="POST" class="container mt-4">
-						<div class="mb-3">
-							<label for="username" class="form-label">Nom
-								d'utilisateur :</label> <input type="text" class="form-control"
-								id="username" name="username" required
-								placeholder="Entrez votre nom d'utilisateur">
-						</div>
-
-						<div class="mb-3">
-							<label for="password" class="form-label">Mot de passe :</label> <input
-								type="password" class="form-control" id="password"
-								name="password" required placeholder="Entrez votre mot de passe">
-						</div>
-
-						<button type="submit" class="btn btn-primary">Créer mon
-							compte</button>
-					</form>
-				</div>
-			</div>
+		<div class="floating-tags-container">
+			<span class="floating-tag tag-purple">{Ingénierie}</span> <span
+				class="floating-tag tag-red">{Cryptographie}</span> <span
+				class="floating-tag tag-cyan">{Développer}</span> <span
+				class="floating-tag tag-yellow">{Réseau}</span>
 		</div>
 
-	</section>
-	<!-- FOOTER -->
-	<div th:insert="~{fragments/footer :: footer}"></div>
+		<section class="create-account">
 
+			<div class="container mt-5">
+				<div class="card create-account shadow-sm">
+					<div class="card-body">
+						<h3 class="card-title mb-4">Nouveau compte</h3>
+						<form action="/create-account" method="POST"
+							class="container mt-4">
+							<div class="mb-3">
+								<label for="username" class="form-label">Nom
+									d'utilisateur :</label> <input type="text" class="form-control"
+									id="username" name="username" required
+									placeholder="Entrez votre nom d'utilisateur">
+							</div>
+
+							<div class="mb-3">
+								<label for="password" class="form-label">Mot de passe :</label>
+								<input type="password" class="form-control" id="password"
+									name="password" required
+									placeholder="Entrez votre mot de passe">
+							</div>
+
+							<button type="submit" class="btn btn-primary">Créer mon
+								compte</button>
+						</form>
+					</div>
+				</div>
+			</div>
+
+		</section>
+		<!-- FOOTER -->
+		<div th:insert="~{fragments/footer :: footer}"></div>
+	</div>
 </body>
 </html>

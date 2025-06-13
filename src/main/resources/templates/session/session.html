@@ -1,24 +1,23 @@
 <!DOCTYPE html>
 <html lang="fr" xmlns:th="http://www.thymeleaf.org">
 
-<head>
-<link rel="stylesheet" th:href="@{/css/pages/session.css}">
-
-</head>
-
 <div th:insert="~{fragments/header :: header}"></div>
 
 <body>
-
-	<!-- NAVIGATION depuis le fragment nav -->
-	<div th:insert="~{fragments/nav :: nav}"></div>
-
 	<div class="container">
-		<h2>Créer une nouvelle session</h2>
+		<!-- NAVIGATION -->
+		<!--<div th:insert="~{fragments/nav :: nav}"></div>  -->
+		<div th:replace="fragments/nav-minimal :: nav"></div>
+
+		<div class="floating-tags-container">
+			<span class="floating-tag tag-purple">{Ingénierie}</span> <span
+				class="floating-tag tag-red">{Cryptographie}</span> <span
+				class="floating-tag tag-cyan">{Développer}</span> <span
+				class="floating-tag tag-yellow">{Réseau}</span>
+		</div>
+		<h1>Page de création de Sessions</h1>
+		<h3>Sélectionnez les modules :</h3>
 		<form method="POST" action="/session/session">
-
-			<h2>Sélectionnez les modules :</h2>
-
 			<div class="modules-container">
 				<div class="module-option" th:each="module : ${modules}">
 					<input type="checkbox" name="moduleIds" th:value="${module.id}"
@@ -28,75 +27,70 @@
 				</div>
 			</div>
 
-
-
 			<button type="submit">Créer la session</button>
 		</form>
+		<hr />
 
-	</div>
-	<hr />
+		<!-- session/session.html -->
+		<div th:fragment="sessionsSection">
+			<h3>Sessions créées</h3>
 
-	<!-- session/session.html -->
-	<div th:fragment="sessionsSection">
-		<h2>Sessions créées</h2>
+			<div th:if="${sessionTemporaires.isEmpty()}">
 
-		<div th:if="${sessionTemporaires.isEmpty()}">
+				<p>Aucune session n’a encore été créée.</p>
+			</div>
 
-			<p>Aucune session n’a encore été créée.</p>
-		</div>
+			<div th:if="${!sessionTemporaires.isEmpty()}">
 
-		<div th:if="${!sessionTemporaires.isEmpty()}">
+				<table>
+					<thead>
+						<tr>
+							<th>ID</th>
+							<th>Date</th>
+							<th>Modules selectionnés</th>
+							<th>QrCode</th>
+							<th>Lien</th>
+							<th>Action</th>
 
-			<table>
-				<thead>
-					<tr>
-						<th>ID</th>
-						<th>Date</th>
-						<th>Modules selectionnés</th>
-						<th>QrCode</th>
-						<th>Lien</th>
-						<th>Action</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="sessionTemporaire : ${sessionTemporaires}">
+							<td th:text="${sessionTemporaire.id}">1</td>
+							<!-- <td th:text="${session.title}">Nom</td> // nom de l'ecole plutot ! -->
+							<td
+								th:text="${#temporals.format(sessionTemporaire.dateCreation, 'dd/MM/yyyy')}"></td>
 
-					</tr>
-				</thead>
-				<tbody>
-					<tr th:each="sessionTemporaire : ${sessionTemporaires}">
-						<td th:text="${sessionTemporaire.id}">1</td>
-						<!-- <td th:text="${session.title}">Nom</td> // nom de l'ecole plutot ! -->
-						<td
-							th:text="${#temporals.format(sessionTemporaire.dateCreation, 'dd/MM/yyyy')}"></td>
+							<td>
+								<div th:each="module : ${sessionTemporaire.modules}">
+									<span th:text="${module.nom}"></span><br />
+								</div>
+							</td>
 
-						<td>
-							<div th:each="module : ${sessionTemporaire.modules}">
-								<span th:text="${module.nom}"></span><br />
-							</div>
-						</td>
+							<td><img th:src="${sessionTemporaire.qrCodeBase64}"
+								alt="QR Code"></td>
 
-						<td><img th:src="${sessionTemporaire.qrCodeBase64}"
-							alt="QR Code"></td>
-
-						<td><a th:href="${sessionTemporaire.urlModules}"
-							target="_blank"> Accéder à la session </a> <br />
-							<p>
-								Lien d'accès : <span th:text="${sessionTemporaire.urlModules}"></span>
-							</p></td>
+							<td><a th:href="${sessionTemporaire.urlModules}"
+								target="_blank"> Accéder à la session </a> <br />
+								<p>
+									Lien d'accès : <span th:text="${sessionTemporaire.urlModules}"></span>
+								</p></td>
 							<!--  exemple de Lien d'accès : http://localhost:4040/accueil-temporaire?modules=69&modules=71 -->
-						<td><a
-							th:href="@{'/session/supprimer/' + ${sessionTemporaire.id}}"
-							title="Supprimer"
-							onclick="return confirm('⚠️ Êtes-vous sûr de vouloir supprimer cette session ?');">
-								<i class="bi bi-trash"
-								style="color: #dc3545; font-size: 1.3rem;"></i>
-						</a></td>
-					</tr>
-				</tbody>
-			</table>
+							<td><a
+								th:href="@{'/session/supprimer/' + ${sessionTemporaire.id}}"
+								title="Supprimer"
+								onclick="return confirm('⚠️ Êtes-vous sûr de vouloir supprimer cette session ?');">
+									<i class="bi bi-trash"
+									style="color: #9e2d66; font-size: 1.3rem;"></i>
+							</a></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
 		</div>
+
+		<!-- FOOTER -->
+		<div th:insert="~{fragments/footer :: footer}"></div>
 	</div>
-
-
-	<!-- FOOTER -->
-	<div th:insert="~{fragments/footer :: footer}"></div>
-
 </body>
 </html>

@@ -10,10 +10,6 @@
 	margin: auto;
 }
 
-.login-container h2 {
-	margin-bottom: 1rem;
-}
-
 /* 🌟 Champs et bouton parfaitement alignés */
 .login-container input, #loginForm>select {
 	width: calc(100% - 40px); /* Largeur identique pour tous */
