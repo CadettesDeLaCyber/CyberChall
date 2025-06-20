@@ -86,16 +86,6 @@ a#roue.nav-link {
 	background-color: #FF6856;
 }
 
-/* Footer */
-footer {
-	text-align: center;
-	padding: 20px;
-}
-
-footer .wrapper {
-	max-width: 1200px;
-	margin: 0 auto;
-}
 
 /* Responsive */
 @media ( max-width : 768px) {

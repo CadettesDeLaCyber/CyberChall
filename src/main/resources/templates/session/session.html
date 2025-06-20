@@ -3,20 +3,119 @@
 
 <div th:insert="~{fragments/header :: header}"></div>
 
+<style>
+h1, h3 {
+	color: #9e2d66;
+	text-align: center;
+	margin-top: 1.5rem;
+}
+
+.modules-container {
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	gap: 1.5rem 2rem;
+	max-width: 700px;
+	margin: 2rem auto;
+}
+
+.module-option {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+	height: 90px; 
+	margin-bottom: inherit;
+}
+
+.module-button {
+	width: 100%;
+	height: 100%;
+	text-align: center;
+	padding: 1rem;
+	border: 2px solid #9e2d66;
+	border-radius: 25px;
+	font-weight: bold;
+	font-size: 1rem;
+	color: #9e2d66;
+	background-color: white;
+	cursor: pointer;
+	transition: all 0.3s ease;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+input[type="checkbox"]:checked+.module-button {
+	background-color: #9e2d66;
+	color: white;
+	box-shadow: 0 0 10px rgba(158, 45, 102, 0.3);
+}
+
+.module-button:hover {
+	background-color: #fbe1ef;
+}
+
+@media ( max-width : 600px) {
+	.modules-container {
+		grid-template-columns: 1fr;
+	}
+}
+
+form button[type="submit"] {
+	display: block;
+	margin: 2rem auto;
+	background-color: #9e2d66;
+	color: white;
+	border: none;
+	padding: 0.9rem 2rem;
+	border-radius: 25px;
+	cursor: pointer;
+	font-size: 1.1rem;
+}
+
+form button:hover {
+	background-color: #b53d7a;
+}
+
+table {
+	width: 60%;
+	border-collapse: collapse;
+	margin: 2rem auto;
+}
+
+th, td {
+	padding: 0.8rem;
+	border: 1px solid #ccc;
+	text-align: center;
+}
+
+th {
+	background-color: #f3f3f3;
+	color: #9e2d66;
+}
+
+img {
+	width: 100px;
+	height: auto;
+}
+</style>
+
 <body>
 	<div class="container">
-		<!-- NAVIGATION -->
-		<!--<div th:insert="~{fragments/nav :: nav}"></div>  -->
+		<!-- Navigation minimal -->
 		<div th:replace="fragments/nav-minimal :: nav"></div>
 
+		<!-- Tags flottants -->
 		<div class="floating-tags-container">
 			<span class="floating-tag tag-purple">{Ingénierie}</span> <span
 				class="floating-tag tag-red">{Cryptographie}</span> <span
 				class="floating-tag tag-cyan">{Développer}</span> <span
 				class="floating-tag tag-yellow">{Réseau}</span>
 		</div>
+
 		<h1>Page de création de Sessions</h1>
 		<h3>Sélectionnez les modules :</h3>
+
 		<form method="POST" action="/session/session">
 			<div class="modules-container">
 				<div class="module-option" th:each="module : ${modules}">
@@ -26,61 +125,52 @@
 						th:text="${module.nom}"></label>
 				</div>
 			</div>
-
 			<button type="submit">Créer la session</button>
 		</form>
+
 		<hr />
 
-		<!-- session/session.html -->
+		<!-- Fragment des sessions -->
 		<div th:fragment="sessionsSection">
 			<h3>Sessions créées</h3>
 
 			<div th:if="${sessionTemporaires.isEmpty()}">
-
 				<p>Aucune session n’a encore été créée.</p>
 			</div>
 
 			<div th:if="${!sessionTemporaires.isEmpty()}">
-
 				<table>
 					<thead>
 						<tr>
 							<th>ID</th>
 							<th>Date</th>
-							<th>Modules selectionnés</th>
-							<th>QrCode</th>
+							<th>Modules sélectionnés</th>
+							<th>QR Code</th>
 							<th>Lien</th>
 							<th>Action</th>
-
 						</tr>
 					</thead>
 					<tbody>
 						<tr th:each="sessionTemporaire : ${sessionTemporaires}">
-							<td th:text="${sessionTemporaire.id}">1</td>
-							<!-- <td th:text="${session.title}">Nom</td> // nom de l'ecole plutot ! -->
+							<td th:text="${sessionTemporaire.id}"></td>
 							<td
 								th:text="${#temporals.format(sessionTemporaire.dateCreation, 'dd/MM/yyyy')}"></td>
-
 							<td>
 								<div th:each="module : ${sessionTemporaire.modules}">
 									<span th:text="${module.nom}"></span><br />
 								</div>
 							</td>
-
 							<td><img th:src="${sessionTemporaire.qrCodeBase64}"
 								alt="QR Code"></td>
-
 							<td><a th:href="${sessionTemporaire.urlModules}"
-								target="_blank"> Accéder à la session </a> <br />
+								target="_blank">Accéder à la session</a>
 								<p>
-									Lien d'accès : <span th:text="${sessionTemporaire.urlModules}"></span>
+									<small th:text="${sessionTemporaire.urlModules}"></small>
 								</p></td>
-							<!--  exemple de Lien d'accès : http://localhost:4040/accueil-temporaire?modules=69&modules=71 -->
 							<td><a
 								th:href="@{'/session/supprimer/' + ${sessionTemporaire.id}}"
-								title="Supprimer"
-								onclick="return confirm('⚠️ Êtes-vous sûr de vouloir supprimer cette session ?');">
-									<i class="bi bi-trash"
+								onclick="return confirm('⚠️ Êtes-vous sûr de vouloir supprimer cette session ?');"
+								title="Supprimer"> <i class="bi bi-trash"
 									style="color: #9e2d66; font-size: 1.3rem;"></i>
 							</a></td>
 						</tr>
@@ -89,8 +179,8 @@
 			</div>
 		</div>
 
-		<!-- FOOTER -->
 		<div th:insert="~{fragments/footer :: footer}"></div>
+
 	</div>
 </body>
 </html>

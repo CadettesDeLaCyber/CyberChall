@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+
+<div th:insert="~{fragments/header :: header}"></div>
+
+<body>
+	<div class="container">
+
+		<!-- NAVIGATION -->
+		<!--<div th:insert="~{fragments/nav :: nav}"></div>  -->
+		<div th:replace="fragments/nav:: nav"></div>
+
+		<section class="intro-banner">
+			<h1>
+				<span id="typed-title"></span>
+			</h1>
+			<p>
+				<span id="typed-text"></span>
+			</p>
+		</section>
+
+		<div class="floating-tags-container">
+			<span class="floating-tag tag-purple">{Ingénierie}</span> <span
+				class="floating-tag tag-red">{Cryptographie}</span> <span
+				class="floating-tag tag-cyan">{Développer}</span> <span
+				class="floating-tag tag-yellow">{Réseau}</span>
+		</div>
+
+		<!-- Message de déconnexion -->
+		<div th:if="${message}" class="alert alert-success">
+			<p th:text="${message}"></p>
+		</div>
+
+		<!-- CONTENU PRINCIPAL -->
+		<main>
+			<div class="login-container">
+				<!--  <a th:href="@{/admin/connexion-admin}" class="btn btn-admin">Connexion</a>  -->
+				<form id="loginForm" action="/admin/connexion-admin" method="post">
+					<!-- Le champ caché doit correspondre à 'role' comme dans le contrôleur -->
+					<input type="hidden" name="role" value="admin"> <input
+						type="text" id="username" name="username"
+						placeholder="Nom d'utilisateur" required> <input
+						type="password" id="password" name="password"
+						placeholder="Mot de passe" required> <br>
+					<button type="submit">Se connecter</button>
+				</form>
+				<!-- pour créer un compte -->
+				<br> <a th:href="@{/admin/create-account}" id="create-account"
+					style="color: #9e2d66;">Créer un compte</a>
+			</div>
+		</main>
+	</div>
+	<!-- FOOTER -->
+	<div th:insert="~{fragments/footer :: footer}"></div>
+</body>
+</html>

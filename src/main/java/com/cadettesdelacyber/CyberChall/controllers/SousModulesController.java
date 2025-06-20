@@ -171,16 +171,16 @@ public class SousModulesController {
         if (quiz == null) {
             return "erreur/404"; // ou une autre page d’erreur
         }
-
+        // Exemple dans ton contrôleur
+        SousModule sousModule = sousModuleService.findById(id); // ou peu importe comment tu le récupères
+        model.addAttribute("sousModule", sousModule); // ⬅️ minuscule !
         model.addAttribute("quiz", quiz);
-       
+    
         // Convertir la chaîne reponses "a,c,b,b,c,b,c,b,b,c" en liste
         List<String> bonnesReponses = Arrays.asList(quiz.getReponses().split(","));
         model.addAttribute("bonnesReponses", bonnesReponses);
 
         return "modules/quiz"; // chemin vers le template quiz.html
     }
-
-
 
 }

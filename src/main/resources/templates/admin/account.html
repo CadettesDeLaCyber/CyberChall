@@ -3,35 +3,59 @@
 
 <div th:insert="~{fragments/header :: header}"></div>
 
+<style>
+.btn-dashboard {
+	display: inline-block;
+	margin-right: 20px;
+	margin-top: 10px;
+	padding: 12px 20px;
+	background-color: #9e2d66;
+	color: white;
+	border-radius: 8px;
+	text-decoration: none;
+	font-weight: bold;
+	transition: background-color 0.3s ease;
+}
+
+.btn-dashboard:hover {
+	background-color: #7b234f;
+}
+</style>
+
+
 <body>
-<div class="container">
-	<!-- NAVIGATION -->
-	<!--<div th:insert="~{fragments/nav :: nav}"></div>  -->
-	<div th:replace="fragments/nav-minimal :: nav"></div>
+	<div class="container">
+		<!-- NAVIGATION -->
+		<!--<div th:insert="~{fragments/nav :: nav}"></div>  -->
+		<div th:replace="fragments/nav-minimal :: nav"></div>
 
-	<div class="floating-tags-container">
-		<span class="floating-tag tag-purple">{Ingénierie}</span> <span
-			class="floating-tag tag-red">{Cryptographie}</span> <span
-			class="floating-tag tag-cyan">{Développer}</span> <span
-			class="floating-tag tag-yellow">{Réseau}</span>
+		<div class="floating-tags-container">
+			<span class="floating-tag tag-purple">{Ingénierie}</span> <span
+				class="floating-tag tag-red">{Cryptographie}</span> <span
+				class="floating-tag tag-cyan">{Développer}</span> <span
+				class="floating-tag tag-yellow">{Réseau}</span>
+		</div>
+
+		<!-- account.html -->
+		<h1>
+			Ton dashboard <span style="color: #9e2d66;"
+				th:text="${admin.username}">Admin !</span>
+		</h1>
+
+		<div style="margin-top: 30px;">
+			<a th:href="@{/modules/create-module}" class="btn-dashboard">➕
+				Créer un module</a> <a th:href="@{/session/session-statistic}"
+				class="btn-dashboard">📊 Voir les statistiques</a>
+		</div>
+
+		<section>
+
+			<!-- Insertion du fragment pour afficher les sessions créées -->
+			<div th:replace="~{session/session :: sessionsSection}"></div>
+
+		</section>
 	</div>
-
-	<!-- account.html -->
-	<h1>
-		Ton dashboard <span style="color: #9e2d66;"
-			th:text="${admin.username}">Admin !</span>
-	</h1>
-
-	<section>
-
-		<!-- Insertion du fragment pour afficher les sessions créées -->
-		<div th:replace="~{session/session :: sessionsSection}"></div>
-
-	</section>
-
-
+	<!-- FOOTER -->
 	<div th:insert="~{fragments/footer :: footer}"></div>
-	</div>
 </body>
-
 </html>

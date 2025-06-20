@@ -8,7 +8,8 @@
 
 		<!-- NAVIGATION -->
 		<!--<div th:insert="~{fragments/nav :: nav}"></div>  -->
-		<div th:replace="fragments/nav:: nav"></div>
+		<div th:replace="~{fragments/nav :: nav}"></div>
+
 
 		<div class="floating-tags-container">
 			<span class="floating-tag tag-purple">{Ingénierie}</span> <span
@@ -23,7 +24,7 @@
 				<div class="card create-account shadow-sm">
 					<div class="card-body">
 						<h3 class="card-title mb-4">Nouveau compte</h3>
-						<form action="/create-account" method="POST"
+						<form action="/admin/create-account" method="POST"
 							class="container mt-4">
 							<div class="mb-3">
 								<label for="username" class="form-label">Nom
@@ -45,10 +46,9 @@
 					</div>
 				</div>
 			</div>
-
 		</section>
-		<!-- FOOTER -->
-		<div th:insert="~{fragments/footer :: footer}"></div>
 	</div>
+	<!-- FOOTER -->
+	<div th:insert="~{fragments/footer :: footer}"></div>
 </body>
 </html>

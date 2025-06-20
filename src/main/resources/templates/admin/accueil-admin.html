@@ -9,24 +9,24 @@
 </div>
 
 <body>
-	<div class="container">
+	<div class="container" >
 
 		<!-- NAVIGATION -->
 		<!--<div th:insert="~{fragments/nav :: nav}"></div>  -->
 		<div th:replace="fragments/nav-minimal :: nav"></div>
 
-		<div class="floating-tags-container">
+		<div class="floating-tags-container" >
 			<span class="floating-tag tag-purple">{Ingénierie}</span> <span
 				class="floating-tag tag-red">{Cryptographie}</span> <span
 				class="floating-tag tag-cyan">{Développer}</span> <span
 				class="floating-tag tag-yellow">{Réseau}</span>
 		</div>
-			<!-- Message de bienvenue -->
-			<h2 th:if="${admin != null}">
-				Bienvenue, <span style="color: #982760;" th:text="${admin.username}">Admin</span>
-				👋
-			</h2>
-			<h2 th:if="${admin == null}">Bienvenue invité 👋</h2>
+		<!-- Message de bienvenue -->
+		<h2 th:if="${admin != null}" style="margin-top:7rem;">
+			Bienvenue, <span style="color: #982760;" th:text="${admin.username}">Admin</span>
+			👋
+		</h2>
+		<h2 th:if="${admin == null}">Bienvenue invité 👋</h2>
 
 		<!-- Alerte session -->
 		<p th:if="${isSessionMode}" class="text-warning text-center fw-bold">
@@ -69,9 +69,8 @@
 			</div>
 
 		</main>
-
-		<!-- FOOTER -->
-		<div th:insert="~{fragments/footer :: footer}"></div>
 	</div>
+	<!-- FOOTER -->
+	<div th:insert="~{fragments/footer :: footer}"></div>
 </body>
 </html>

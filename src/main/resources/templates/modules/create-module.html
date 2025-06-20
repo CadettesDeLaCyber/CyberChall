@@ -104,7 +104,7 @@ hr {
 				:</label> <input type="text" id="sousTitre" name="sousModules[0].titre"
 				required> <label for="sousImage">Image du
 				sous-module :</label> <input type="text" id="sousImage"
-				name="sousModules[0].imageUrl" required> 
+				name="sousModules[0].imageUrl" required>
 
 			<!-- COURS -->
 			<label for="cours">Contenu du cours à introduire ici
@@ -164,5 +164,7 @@ hr {
 		updatePreview('questions');
 	</script>
 
+	<!-- FOOTER -->
+	<div th:insert="~{fragments/footer :: footer}"></div>
 </body>
 </html>

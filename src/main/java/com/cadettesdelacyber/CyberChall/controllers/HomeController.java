@@ -143,9 +143,9 @@ public class HomeController {
     // Section 6: Challenge mot de passe
     // ============================================================
 
-    @GetMapping("/modules/cyberattaque/challenge-motdepasse")
+    @GetMapping("/modules/challenge")
     public String afficherChallengeMotdepasse() {
-        return "modules/cyberattaque/challenge-motdepasse";
+        return "modules/challenge";
     }
 
     // ============================================================

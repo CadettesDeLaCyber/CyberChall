@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+
+<div th:insert="~{fragments/header :: header}"></div>
+
+<body>
+	<!-- NAVIGATION -->
+	<!--<div th:insert="~{fragments/nav :: nav}"></div>  -->
+	<div th:replace="fragments/nav-minimal :: nav"></div>
+	<div class="container">
+
+		<div class="container challenge-motpasse">
+			<h1  style="margin-bottom: 5rem;  margin-top: 5rem;">🔍 Challenge : Trouve le mot de passe caché</h1>
+			<p>Un mot de passe est caché dans cette page... Inspecte le code
+				source pour le trouver !</p>
+
+			<form onsubmit="checkPassword(event)">
+				<input type="text" id="password" placeholder="Entre le mot de passe"
+					required>
+				<button type="submit">Valider</button>
+			</form>
+
+			<p id="result"></p>
+			<div id="hint-popup"
+				style="display: none; padding: 15px; margin-top: 20px; border: 1px solid #ccc; border-radius: 10px; background-color: #f9f9f9; color: #333;">
+				💡 <strong>Indice :</strong> Inspecte le code source de la page
+				(clic droit > "Afficher le code source").
+			</div>
+		</div>
+	</div>
+	<script>
+        function checkPassword(e) {
+            e.preventDefault();
+            const pwd = document.getElementById("password").value.trim();
+            const result = document.getElementById("result");
+
+            if (pwd === "cyber42") {
+                result.textContent = "✅ Bravo ! Tu as trouvé le mot de passe.";
+                result.style.color = "green";
+            } else {
+                result.textContent = "❌ Ce n’est pas le bon mot de passe. Essaie encore.";
+                result.style.color = "red";
+            }
+        }
+        
+        let found = false;
+
+        function checkPassword(e) {
+            e.preventDefault();
+            const pwd = document.getElementById("password").value.trim();
+            const result = document.getElementById("result");
+
+            if (pwd === "cyber42") {
+                result.textContent = "✅ Bravo ! Tu as trouvé le mot de passe.";
+                result.style.color = "green";
+                found = true;
+            } else {
+                result.textContent = "❌ Ce n’est pas le bon mot de passe. Essaie encore.";
+                result.style.color = "red";
+            }
+        }
+
+        // Affichage du popup après 1 minute si mot de passe incorrect
+        setTimeout(() => {
+            if (!found) {
+                document.getElementById("hint-popup").style.display = "block";
+            }
+        }, 60000); // 1 minute
+    </script>
+
+	<!-- FOOTER -->
+	<div th:insert="~{fragments/footer :: footer}"></div>
+</body>
+</html>

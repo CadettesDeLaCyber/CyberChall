@@ -9,31 +9,41 @@
 
 <body>
 
-	<!-- NAVIGATION depuis le fragment nav -->
-	<div th:insert="~{fragments/nav :: nav}"></div>
+	<div class="container">
 
-	<div id="quiz-container">
-		<h1 th:text="'Quiz : ' + ${sousModuleTitre}"></h1>
+		<!-- NAVIGATION -->
+		<!--<div th:insert="~{fragments/nav :: nav}"></div>  -->
+		<div th:replace="fragments/nav-minimal :: nav"></div>
 
-
-		<div id="timer">
-			<i class="fas fa-hourglass-half"></i> Temps restant : <span id="time">02:00</span>
+		<div class="floating-tags-container">
+			<span class="floating-tag tag-purple">{Ingénierie}</span> <span
+				class="floating-tag tag-red">{Cryptographie}</span> <span
+				class="floating-tag tag-cyan">{Développer}</span> <span
+				class="floating-tag tag-yellow">{Réseau}</span>
 		</div>
+		<br><br>
 
-		<form id="quiz-form">
-			<div th:utext="${quiz.questions}"></div>
-			
-			<button type="submit" id="submit-btn">Valider</button>
-			
-		</form>
+		<div id="quiz-container">
+			<h1 th:text="'Quiz : ' + ${sousModule.titre}"></h1>
 
-		<div id="result"></div>
-		<div id="score" style="display: none;"></div>
+			<div id="timer">
+				<i class="fas fa-hourglass-half"></i> Temps restant : <span
+					id="time">02:00</span>
+			</div>
+
+			<form id="quiz-form">
+				<div th:utext="${quiz.questions}"></div>
+
+				<button type="submit" id="submit-btn">Valider</button>
+
+			</form>
+
+			<div id="result"></div>
+			<div id="score" style="display: none;"></div>
+		</div>
 	</div>
 
+	<!-- FOOTER -->
+	<div th:insert="~{fragments/footer :: footer}"></div>
 </body>
-
-<!-- FOOTER -->
-<div th:insert="~{fragments/footer :: footer}"></div>
-
 </html>

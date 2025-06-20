@@ -2,230 +2,229 @@
 <html lang="fr" xmlns:th="http://www.thymeleaf.org">
 
 <div th:insert="~{fragments/header :: header}"></div>
+<style>
+body {
+	font-family: 'Roboto', Arial, sans-serif;
+	background: linear-gradient(135deg, #18181e, #2c2c39);
+	color: #fff;
+	margin: 0;
+	padding: 0;
+	display: flex;
+	flex-direction: column;
+	min-height: 100vh;
+	align-items: center;
+	justify-content: flex-start;
+	padding-top: 2rem;
+	transition: background 0.5s ease, color 0.5s ease;
+}
 
+header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 1.5rem 3rem;
+	background: linear-gradient(90deg, #080809, #2c2c39);
+	box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+	border-radius: 20px;
+	margin: 1rem auto;
+	width: 90%;
+	max-width: 1200px;
+	transition: background 0.5s ease;
+}
+
+header .logo h1 {
+	margin: 0;
+	font-size: 2rem;
+	background: linear-gradient(90deg, #ffffff, #2a2a3b);
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+	font-weight: bold;
+}
+
+header nav {
+	display: flex;
+	align-items: center;
+	width: 100%;
+	justify-content: flex-end;
+}
+
+header nav ul {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	display: flex;
+}
+
+header nav ul li {
+	margin: 0 1.5rem;
+}
+
+header nav ul li a {
+	text-decoration: none;
+	color: #ffffff;
+	font-weight: bold;
+	font-size: 1.1rem;
+	transition: color 0.3s ease;
+}
+
+/* 🌑 Mode sombre: Hover en vert */
+header nav ul li a:hover {
+	color: #f37500;
+}
+
+/* ---- 🎚️ Toggle Switch ---- */
+.toggle-container {
+	display: flex;
+	align-items: center;
+	cursor: pointer;
+	margin-left: 2rem;
+}
+
+.toggle-switch {
+	width: 50px;
+	height: 24px;
+	background: linear-gradient(to right, #ffffff, #2a2a3b);
+	border-radius: 12px;
+	position: relative;
+	transition: all 0.3s;
+}
+
+.toggle-switch::before {
+	content: '';
+	position: absolute;
+	width: 20px;
+	height: 20px;
+	background: white;
+	border-radius: 50%;
+	top: 50%;
+	left: 4px;
+	transform: translateY(-50%);
+	transition: all 0.3s;
+}
+
+/* ---- 🌞 Mode Clair ---- */
+body.light-mode {
+	background: linear-gradient(135deg, #edf0f6, #e0e0e0);
+	color: #333;
+}
+
+body.light-mode header {
+	background: linear-gradient(90deg, #f6f9ff, #e0e0e0);
+	box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+body.light-mode header .logo h1 {
+	background: linear-gradient(90deg, #000000, #555555);
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+}
+
+body.light-mode header nav ul li a {
+	color: #333;
+}
+
+/* 🌞 Mode clair: Hover */
+body.light-mode header nav ul li a:hover {
+	color: #d86800;
+}
+
+body.light-mode .toggle-switch {
+	background: linear-gradient(to right, #bbb, #666);
+}
+
+body.light-mode .toggle-switch::before {
+	left: calc(100% - 24px);
+}
+
+nav ul {
+	list-style: none;
+	display: flex;
+	padding: 0;
+	margin: 0;
+}
+
+nav ul li {
+	margin: 0 1.5rem;
+}
+
+nav ul li a {
+	color: #fff;
+	font-weight: bold;
+	text-decoration: none;
+}
+
+nav ul li a:hover {
+	color: #f37500;
+}
+
+.toggle-container {
+	margin-left: 2rem;
+	cursor: pointer;
+}
+
+.toggle-switch {
+	width: 50px;
+	height: 24px;
+	background: linear-gradient(to right, #ffffff, #2a2a3b);
+	border-radius: 12px;
+	position: relative;
+}
+
+.toggle-switch::before {
+	content: '';
+	position: absolute;
+	width: 20px;
+	height: 20px;
+	background: white;
+	border-radius: 50%;
+	top: 50%;
+	left: 4px;
+	transform: translateY(-50%);
+}
+
+h1 {
+	font-size: 2rem;
+	margin-bottom: 1rem;
+	background: linear-gradient(90deg, #ffffff, #2a2a3b);
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+}
+
+.session-container {
+	background: linear-gradient(135deg, #2c2c39, #18181e);
+	padding: 2rem;
+	border-radius: 20px;
+	width: 90%;
+	max-width: 1000px;
+	box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+	margin-bottom: 2.5rem;
+}
+
+canvas {
+	margin: 2rem auto;
+	max-width: 100%;
+}
+</style>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <body>
 
 	<!-- NAVIGATION depuis le fragment nav -->
 	<div th:insert="~{fragments/nav :: nav}"></div>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <style>
-        body {
-            font-family: 'Roboto', Arial, sans-serif;
-            background: linear-gradient(135deg, #18181e, #2c2c39);
-            color: #fff;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
-            align-items: center;
-            justify-content: flex-start;
-            padding-top: 2rem;
-            transition: background 0.5s ease, color 0.5s ease;
-        }
-
-        header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1.5rem 3rem;
-            background: linear-gradient(90deg, #080809, #2c2c39);
-            box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
-            border-radius: 20px;
-            margin: 1rem auto;
-            width: 90%;
-            max-width: 1200px;
-            transition: background 0.5s ease;
-        }
-
-        header .logo h1 {
-            margin: 0;
-            font-size: 2rem;
-            background: linear-gradient(90deg, #ffffff, #2a2a3b);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            font-weight: bold;
-        }
-
-        header nav {
-            display: flex;
-            align-items: center;
-            width: 100%;
-            justify-content: flex-end;
-        }
-
-        header nav ul {
-            list-style: none;
-            margin: 0;
-            padding: 0;
-            display: flex;
-        }
-
-        header nav ul li {
-            margin: 0 1.5rem;
-        }
-
-        header nav ul li a {
-            text-decoration: none;
-            color: #ffffff;
-            font-weight: bold;
-            font-size: 1.1rem;
-            transition: color 0.3s ease;
-        }
-
-        /* 🌑 Mode sombre: Hover en vert */
-        header nav ul li a:hover {
-            color: #f37500;
-        }
-
-        /* ---- 🎚️ Toggle Switch ---- */
-        .toggle-container {
-            display: flex;
-            align-items: center;
-            cursor: pointer;
-            margin-left: 2rem;
-        }
-
-        .toggle-switch {
-            width: 50px;
-            height: 24px;
-            background: linear-gradient(to right, #ffffff, #2a2a3b);
-            border-radius: 12px;
-            position: relative;
-            transition: all 0.3s;
-        }
-
-        .toggle-switch::before {
-            content: '';
-            position: absolute;
-            width: 20px;
-            height: 20px;
-            background: white;
-            border-radius: 50%;
-            top: 50%;
-            left: 4px;
-            transform: translateY(-50%);
-            transition: all 0.3s;
-        }
-
-        /* ---- 🌞 Mode Clair ---- */
-        body.light-mode {
-            background: linear-gradient(135deg, #edf0f6, #e0e0e0);
-            color: #333;
-        }
-
-        body.light-mode header {
-            background: linear-gradient(90deg, #f6f9ff, #e0e0e0);
-            box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
-        }
-
-        body.light-mode header .logo h1 {
-            background: linear-gradient(90deg, #000000, #555555);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        body.light-mode header nav ul li a {
-            color: #333;
-        }
-
-        /* 🌞 Mode clair: Hover */
-        body.light-mode header nav ul li a:hover {
-            color: #d86800;
-        }
-
-        body.light-mode .toggle-switch {
-            background: linear-gradient(to right, #bbb, #666);
-        }
-
-        body.light-mode .toggle-switch::before {
-            left: calc(100% - 24px);
-        }
 
 
-        nav ul {
-            list-style: none;
-            display: flex;
-            padding: 0;
-            margin: 0;
-        }
+	<h1>Statistiques de la session</h1>
 
-        nav ul li {
-            margin: 0 1.5rem;
-        }
+	<div class="session-container">
+		<p class="info-line">
+			📈 Nombre total de connexions depuis l'ouverture de la session : <strong>30</strong>
+		</p>
 
-        nav ul li a {
-            color: #fff;
-            font-weight: bold;
-            text-decoration: none;
-        }
+		<canvas id="connectionsChart" width="800" height="300"></canvas>
+		<canvas id="scoresChart" width="800" height="300"></canvas>
 
-        nav ul li a:hover {
-            color: #f37500;
-        }
+	</div>
 
-        .toggle-container {
-            margin-left: 2rem;
-            cursor: pointer;
-        }
-
-        .toggle-switch {
-            width: 50px;
-            height: 24px;
-            background: linear-gradient(to right, #ffffff, #2a2a3b);
-            border-radius: 12px;
-            position: relative;
-        }
-
-        .toggle-switch::before {
-            content: '';
-            position: absolute;
-            width: 20px;
-            height: 20px;
-            background: white;
-            border-radius: 50%;
-            top: 50%;
-            left: 4px;
-            transform: translateY(-50%);
-        }
-
-        h1 {
-            font-size: 2rem;
-            margin-bottom: 1rem;
-            background: linear-gradient(90deg, #ffffff, #2a2a3b);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .session-container {
-            background: linear-gradient(135deg, #2c2c39, #18181e);
-            padding: 2rem;
-            border-radius: 20px;
-            width: 90%;
-            max-width: 1000px;
-            box-shadow: 0px 4px 10px rgba(0,0,0,0.3);
-            margin-bottom: 2.5rem;
-        }
-
-        canvas {
-            margin: 2rem auto;
-            max-width: 100%;
-        }
-
-    </style>
-  
-
-    <h1>Statistiques de la session</h1>
-
-    <div class="session-container">
-        <p class="info-line">📈 Nombre total de connexions depuis l'ouverture de la session : <strong>30</strong></p>
-
-        <canvas id="connectionsChart" width="800" height="300"></canvas>
-        <canvas id="scoresChart" width="800" height="300"></canvas>
-
-    </div>
-
-    <script>
+	<script>
         const ctx1 = document.getElementById('connectionsChart').getContext('2d');
         new Chart(ctx1, {
             type: 'line',
@@ -273,8 +272,8 @@
             }
         };
     </script>
+
 	<!-- FOOTER -->
 	<div th:insert="~{fragments/footer :: footer}"></div>
-
 </body>
 </html>

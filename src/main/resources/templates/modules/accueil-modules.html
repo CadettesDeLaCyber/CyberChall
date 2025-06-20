@@ -82,50 +82,50 @@
 	font-weight: bold;
 	cursor: pointer;
 	transition: background 0.3s;
-
 	/* clef ici */
 	width: 100%;
 	display: block;
 }
 </style>
 
-<body class="container">
+<body>
 
 	<!-- NAVIGATION -->
 	<!--<div th:insert="~{fragments/nav :: nav}"></div>  -->
 	<div th:replace="fragments/nav-minimal :: nav"></div>
+	<div class="container">
 
-	<div class="floating-tags-container">
-		<span class="floating-tag tag-purple">{Ingénierie}</span> <span
-			class="floating-tag tag-red">{Cryptographie}</span> <span
-			class="floating-tag tag-cyan">{Développer}</span> <span
-			class="floating-tag tag-yellow">{Réseau}</span>
-	</div>
-
-
-	<!-- Message de déconnexion -->
-	<div th:if="${message}" class="alert alert-success">
-		<p th:text="${message}"></p>
-	</div>
-
-	<!-- Flèche de retour -->
-	<div class="back-button">
-		<a th:href="@{/}">←</a>
-	</div>
-
-	<!-- Contenu principal -->
-	<main class="module-container">
-
-		<div class="left-section">
-			<img th:src="@{${sousModule.imageUrl}}" alt="Image du sous-module" />
+		<div class="floating-tags-container">
+			<span class="floating-tag tag-purple">{Ingénierie}</span> <span
+				class="floating-tag tag-red">{Cryptographie}</span> <span
+				class="floating-tag tag-cyan">{Développer}</span> <span
+				class="floating-tag tag-yellow">{Réseau}</span>
 		</div>
 
-		<div class="right-section">
-			<h2 th:text="${sousModule.titre}">Titre</h2>
-			<p>Explication du cours en quelques phrases. Explication du cours
-				en quelques phrases. Explication du cours en quelques phrases.
-				Explication du cours en quelques phrases.</p>
-			<!-- 
+
+		<!-- Message de déconnexion -->
+		<div th:if="${message}" class="alert alert-success">
+			<p th:text="${message}"></p>
+		</div>
+
+		<!-- Flèche de retour -->
+		<div class="back-button">
+			<a th:href="@{/}">←</a>
+		</div>
+
+		<!-- Contenu principal -->
+		<main class="module-container">
+
+			<div class="left-section">
+				<img th:src="@{${sousModule.imageUrl}}" alt="Image du sous-module" />
+			</div>
+
+			<div class="right-section">
+				<h2 th:text="${sousModule.titre}">Titre</h2>
+				<p>Explication du cours en quelques phrases. Explication du
+					cours en quelques phrases. Explication du cours en quelques
+					phrases. Explication du cours en quelques phrases.</p>
+				<!-- 
 			Liens des boutons a généréer dynamiquement selon l'id du module
 			<div class="buttons">
 				<a href="${sousModule.cours}">Cours</a> 
@@ -134,21 +134,22 @@
 			</div>
 			 -->
 
-			<div class="buttons">
-				<div class="top-buttons">
-					<a th:href="@{'/modules/cours/' + ${coursId}}">Cours</a> <a
-						th:href="@{'/modules/quiz/' + ${quizId}}">Quiz</a>
+				<div class="buttons">
+					<div class="top-buttons">
+						<a th:href="@{'/modules/cours/' + ${coursId}}">Cours</a> <a
+							th:href="@{'/modules/quiz/' + ${quizId}}">Quiz</a>
+					</div>
+					<!--<a class="bottom-button"
+						th:href="@{'/modules/challenge/' + ${challengeId}}">Challenge</a>  -->
+					<a class="bottom-button" th:href="@{/modules/challenge}">Challenge</a>
+
 				</div>
-				<a class="bottom-button"
-					th:href="@{'/modules/challenge/' + ${challengeId}}">Challenge</a>
+
 			</div>
 
-		</div>
-
-	</main>
-
+		</main>
+	</div>
 	<!-- FOOTER -->
 	<div th:insert="~{fragments/footer :: footer}"></div>
-
 </body>
 </html>

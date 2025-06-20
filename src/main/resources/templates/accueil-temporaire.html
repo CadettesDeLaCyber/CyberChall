@@ -113,9 +113,9 @@ h2 {
 				</div>
 			</div>
 		</main>
-
-		<!-- Script Slider -->
-		<script>
+	</div>
+	<!-- Script Slider -->
+	<script>
 function updateArrowVisibility(slider, leftArrow, rightArrow) {
     leftArrow.style.visibility = slider.scrollLeft <= 0 ? 'hidden' : 'visible';
     rightArrow.style.visibility = slider.scrollLeft + slider.offsetWidth >= slider.scrollWidth - 1 ? 'hidden' : 'visible';
@@ -142,8 +142,7 @@ document.querySelectorAll('.card-module').forEach(module => {
 });
 </script>
 
-		<div th:insert="~{fragments/footer :: footer}"></div>
-
-	</div>
+	<!-- FOOTER -->
+	<div th:insert="~{fragments/footer :: footer}"></div>
 </body>
 </html>
