@@ -1,18 +1,11 @@
 .floating-tags-container {
-  position: absolute; /* ou absolute selon contexte */
-  top: 6rem;       /* place là où tu veux */
-  left: 0;
-  width: 100%;     /* ou largeur adaptée */
+  position: absolute; 
+  top: 8rem; 
+  width: 100%;  
   height: 80px;
-  overflow: visible; /* pour que les tags animés ne soient pas coupés */
-  margin-top: 0;    /* supprimer margin si besoin */
-  z-index: 1; /* plus bas */
-  pointer-events: none; /* optionnel, pour ne pas gêner les clics en dessous */
-}
-
-h1, nav {
-  position: relative; /* ou fixed selon le cas */
-  z-index: 10; /* plus haut */
+  overflow: visible; 
+  z-index: 1; 
+  pointer-events: none; 
 }
 
 .floating-tag {
@@ -27,7 +20,7 @@ h1, nav {
 
 /* Couleurs */
 .tag-purple {
-  background-color: #d1b3ff; /* violet clair */
+  background-color: #d1b3ff; 
   color: #1a0033;
   left: 5%;
   top: 20%;

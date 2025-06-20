@@ -101,8 +101,18 @@ nav {
 	justify-content: space-between;
 	align-items: center;
 	padding: 1rem 2rem;
-	width: 80%;
-	margin: auto;
+}
+
+#right {
+	text-align: right;
+}
+
+#left {
+	text-align: left;
+}
+
+#center {
+	text-align: center;
 }
 
 .logo {
@@ -111,8 +121,8 @@ nav {
 }
 
 .logo img {
-	width: 7rem;
-	height: auto;
+	width: 10rem;
+	height: 8rem;
 	margin-right: 1rem;
 }
 
@@ -312,7 +322,7 @@ footer {
 	background: #040925;
 	color: white;
 	height: 300px;
-	text-align: center;	
+	text-align: center;
 }
 
 footer .social-icons a {
@@ -348,17 +358,4 @@ footer .social-icons a img:hover {
 	content: '|';
 	animation: blink 1s infinite;
 	color: #982760;
-}
-
-@keyframes blink {
-  0%, 100% {
-    opacity: 1;
-  }
-  50% {
-    opacity: 0;
-  }
-}
-
-i.bi.bi-linkedin {
-  color: white;
 }

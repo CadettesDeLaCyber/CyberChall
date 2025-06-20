@@ -1,25 +1,24 @@
 <div th:fragment="nav">
 	<div class="wrapper">
 		<header>
+			<div class="logo" id="left">
+				<a th:href="@{/}"><img src="/images/logo_cadettes.png"
+					alt="Logo Cadettes de la Cyber" /></a>
+			</div>
 			<nav>
-				<div class="logo">
-					<a th:href="@{/}"><img src="/images/logo_cadettes.png"
-						alt="Logo Cadettes de la Cyber" /></a>
-				</div>
-				<h1>
+
+				<h1 style="margin-right: 3rem;">
 					<a th:href="@{/}">CyberChall</a>
 				</h1>
 
-				<ul class="nav-links">
+				<ul class="nav-links" id="right">
 					<li><a th:href="@{/}">Accueil</a></li>
 
 					<!-- Menu déroulant COMPTE -->
-					<li class="nav-item dropdown position-relative"><a
-						class="nav-link dropdown-toggle text-white" href="#"
-						id="compteDropdown" role="button" data-bs-toggle="dropdown"
-						aria-expanded="false">Compte</a>
-						<ul class="dropdown-menu dropdown-menu-dark position-absolute"
-							aria-labelledby="compteDropdown">
+					<li class="nav-item dropdown "><a
+						class="nav-link dropdown-toggle" href="#" id="compteDropdown"
+						role="button" data-bs-toggle="dropdown" aria-expanded="false">Compte</a>
+						<ul class="dropdown-menu " aria-labelledby="compteDropdown">
 
 							<li th:if="${admin != null}"><a class="dropdown-item"
 								th:href="@{/admin/account}">Mon Compte</a></li>
@@ -37,10 +36,10 @@
 						th:href="${estConnecte} ? @{/deconnexion} : (role == 'admin' ? @{/admin/connexion-admin} : @{/})"
 						th:text="${estConnecte} ? 'Déconnexion' : 'Connexion'"> </a></li>
 					<!-- Icône paramètres (roue crantée) -->
-					<li class="nav-item dropdown position-relative"><a href="#"
-						class="nav-link" onclick="toggleAccessibilityMenu()"
+					<li class="nav-item dropdown " style="margin-right: 2rem;"><a
+						href="#" class="nav-link" onclick="toggleAccessibilityMenu()"
 						title="Accessibilité"> ⚙️ </a>
-						<ul class="dropdown-menu dropdown-menu-dark position-absolute"
+						<ul class="dropdown-menu dropdown-menu-dark"
 							id="accessibilityMenu" style="display: none;">
 							<li><a href="#" onclick="adjustFontSize(1)">🔎 Agrandir
 									le texte</a></li>
@@ -60,8 +59,6 @@
 				<ul class="nav-links" id="navLinks">
 					<!-- tes <li> ici -->
 				</ul>
-
-
 				<div class="toggle-container">
 					<div class="toggle-switch" id="themeToggle"></div>
 				</div>
